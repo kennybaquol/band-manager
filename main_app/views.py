@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Band
+from django.views.generic.edit import CreateView
+from .models import Band 
 
 # Define the home view
 def home(request):
@@ -15,3 +16,7 @@ def bands_index(request):
 def bands_detail(request, band_id):
   band = Band.objects.get(id=band_id)
   return render(request, 'bands/detail.html', { 'band': band })
+
+class BandCreate(CreateView):
+  model = Band
+  fields = '__all__'
