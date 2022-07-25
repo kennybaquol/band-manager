@@ -1,66 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Band Details</h1>
+<h1>{{ band.name }}</h1>
 
 <div class="row">
-    <div class="col s6">
-        <div class="card">
-            <div class="card-content">
-                <span class="card-title">{{ band.name }}</span>
-                <p>Put 1st Added Model Here</p>
-                <p>Put 2nd Added Model Here</p>
-            </div>
-            <div class="card-action">
-                <a href="{% url 'bands_update' band.id %}">Edit</a>
-                <a href="{% url 'bands_delete' band.id %}">Delete</a>
-            </div>
-        </div>
-    </div>
-    <div class="col s6">
-        <form action="{% url 'add_venue' band.id %}" method="POST">
-            {% csrf_token %}
-            {{ venue_form.as_p }}
-            <input type="submit" class="btn" value="Add Venue">
-        </form>
-        <table class="striped">
-            <thead>
-                <tr>
-                    <th>Venue</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for venue in band.venue_set.all %}
-                <tr>
-                    <td>{{venue.name}}</td>
-                    <td>{{venue.get_status_display}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <li><a href="{% url 'venues_index' band.id %}">View My Venues</a></li>
 </div>
 
-<script>
-    // const name = document.getElementById('id_name');
-    // M.FormSelect.init(name);
-
-    // const state = document.getElementById('id_state');
-    // M.FormSelect.init(state);
-
-    // const city = document.getElementById('id_city');
-    // M.FormSelect.init(city);
-
-    // const email = document.getElementById('id_email');
-    // M.FormSelect.init(email);
-
-    // const phone = document.getElementById('id_phone');
-    // M.FormSelect.init(phone);
-
-    // const note = document.getElementById('id_note');
-    // M.FormSelect.init(note);
-    
+<script>    
     const status = document.getElementById('id_status');
     M.FormSelect.init(status);
 </script>

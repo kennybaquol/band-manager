@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Band 
+from .models import Band, Venue
 from .forms import VenueForm
 
 # Define the home view
@@ -13,6 +13,14 @@ def about(request):
 def bands_index(request):
     bands = Band.objects.all()
     return render(request, 'bands/index.html', { 'bands': bands })
+
+def venues_index(request, band_id):
+  band = Band.objects.get(id=band_id)
+  venues = band.venue_set.all()
+  return render(request, 'venues/index.html', {
+    'venues': venues,
+    'band': band
+  })
 
 def bands_detail(request, band_id):
   band = Band.objects.get(id=band_id)

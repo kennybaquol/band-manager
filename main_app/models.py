@@ -23,7 +23,7 @@ class Venue(models.Model):
     state = models.CharField(max_length=150)
     city = models.CharField(max_length=150)
     email = models.CharField(max_length=150, blank=True)
-    phone = models.IntegerField(null=True)
+    phone = models.CharField(max_length=30, blank=True)
     note = models.CharField(max_length=150, blank=True)
     status = models.CharField(max_length=30, choices=STATUSES, default=STATUSES[0][0])
     band = models.ForeignKey(Band, on_delete=models.CASCADE)
