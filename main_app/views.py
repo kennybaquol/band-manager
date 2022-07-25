@@ -9,3 +9,6 @@ def home(request):
 
 def about(request):
   return render(request, 'about.html')
+
+def bands_index(request):
+  return render(request, 'bands_index.html', { 'bands': bands })

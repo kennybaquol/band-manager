@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>My Bands</h1>
+
+{% for band in bands %}
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ band.name }}</span>
+      <p>Put 1st Added Model Here</p>
+      <p>Put 2nd Added Model Here</p>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
