@@ -9,6 +9,10 @@
         <p>Put 1st Added Model Here</p>
         <p>Put 2nd Added Model Here</p>
     </div>
+    <div class="card-action">
+        <a href="{% url 'bands_update' band.id %}">Edit</a>
+        <a href="{% url 'bands_delete' band.id %}">Delete</a>
+    </div>
 </div>
 
 {% endblock %}

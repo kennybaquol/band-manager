@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Band 
 
 # Define the home view
@@ -20,3 +20,14 @@ def bands_detail(request, band_id):
 class BandCreate(CreateView):
   model = Band
   fields = '__all__'
+  success_url = '/bands/'
+
+# **NEED TO REMOVE ABILITY TO UPDATE AND DELETE BANDS LATER**
+class BandUpdate(UpdateView):
+  model = Band
+  fields = []
+
+class BandDelete(DeleteView):
+  model = Band
+  success_url = '/bands/'
+# **NEED TO REMOVE ABILITY TO UPDATE AND DELETE BANDS LATER**
