@@ -1,14 +1,13 @@
 from django.shortcuts import render
-
-# Add the following import
-from django.http import HttpResponse
+from .models import Band
 
 # Define the home view
 def home(request):
-  return HttpResponse('<h1>Hello /ᐠ｡‸｡ᐟ\ﾉ</h1>')
+    return render(request, 'home.html')
 
 def about(request):
-  return render(request, 'about.html')
+    return render(request, 'about.html')
 
 def bands_index(request):
-  return render(request, 'bands_index.html', { 'bands': bands })
+    bands = Band.objects.all()
+    return render(request, 'bands/index.html', { 'bands': bands })
