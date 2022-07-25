@@ -1,5 +1,6 @@
 # Band Manager
-So easy that a singer could use it!
+*So easy that a singer could use it!*
+**INSERT DESCRIPTION HERE**
 
 ## Wireframes & ERD
 
