@@ -29,4 +29,4 @@ class Venue(models.Model):
     band = models.ForeignKey(Band, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.get_status_display()} on {self.date}"
+        return f"{self.get_status_display()} on {self.name}"
