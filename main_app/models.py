@@ -30,3 +30,6 @@ class Venue(models.Model):
 
     def __str__(self):
         return f"{self.get_status_display()} on {self.name}"
+
+    class Meta:
+        ordering = ['-status']
