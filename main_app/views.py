@@ -64,11 +64,9 @@ def add_venue(request, band_id):
 def venues_update(request, band_id, venue_id):
   band = Band.objects.get(id=band_id)
   venue = Venue.objects.get(id=venue_id)
-  venue_form = VenueForm()
   return render(request, 'venues/update.html', {
     'band': band,
-    'venue': venue,
-    'venue_form': venue_form
+    'venue': venue
   })
 
 # POST route that edits the current Venue using the completed form data
