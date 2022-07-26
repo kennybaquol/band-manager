@@ -1,7 +1,29 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from .models import Band, Venue
 from .forms import VenueForm
+
+def signup(request):
+  error_message = ''
+  if request.method == 'POST':
+    # This is how to create a 'user' form object
+    # that includes the data from the browser
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      # This will add the user to the database
+      user = form.save()
+      # This is how we log a user in via code
+      login(request, user)
+      return redirect('index')
+    else:
+      error_message = 'Invalid sign up - try again'
+  # A bad POST or a GET request, so render signup.html with an empty form
+  form = UserCreationForm()
+  context = {'form': form, 'error_message': error_message}
+  return render(request, 'registration/signup.html', context)
 
 # Define the home view
 def home(request):
@@ -10,10 +32,12 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def bands_index(request):
-    bands = Band.objects.all()
+    bands = Band.objects.filter(user=request.user)
     return render(request, 'bands/index.html', { 'bands': bands })
 
+@login_required
 def venues_index(request, band_id):
   band = Band.objects.get(id=band_id)
   venues = band.venue_set.all()
@@ -24,12 +48,14 @@ def venues_index(request, band_id):
     # 'venue_form': venue_form
   })
 
+@login_required
 def bands_detail(request, band_id):
   band = Band.objects.get(id=band_id)
   return render(request, 'bands/detail.html', { 
     'band': band,
   })
 
+@login_required
 def venues_detail(request, band_id, venue_id):
   band = Band.objects.get(id=band_id)
   venue = Venue.objects.get(id=venue_id)
@@ -39,6 +65,7 @@ def venues_detail(request, band_id, venue_id):
   })
 
 # GET route that takes the user to the page with the add venue form
+@login_required
 def venues_create(request, band_id):
   band = Band.objects.get(id=band_id)
   venue_form = VenueForm()
@@ -48,6 +75,7 @@ def venues_create(request, band_id):
   })
 
 # POST route that creates a Venue using the completed form data
+@login_required
 def add_venue(request, band_id):
   # create a ModelForm instance using the data in request.POST
   form = VenueForm(request.POST)
@@ -61,6 +89,7 @@ def add_venue(request, band_id):
   return redirect('detail', band_id=band_id)
 
 # GET route that takes the user to the page with the edit venue form
+@login_required
 def venues_update(request, band_id, venue_id):
   band = Band.objects.get(id=band_id)
   venue = Venue.objects.get(id=venue_id)
@@ -70,6 +99,7 @@ def venues_update(request, band_id, venue_id):
   })
 
 # POST route that edits the current Venue using the completed form data
+@login_required
 def edit_venue(request, band_id, venue_id):
   # venue = Venue.objects.get(id=venue_id)
   form = VenueForm(request.POST)
