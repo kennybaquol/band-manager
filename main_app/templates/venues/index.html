@@ -7,7 +7,6 @@
     <a href="{% url 'venues_create' band.id %}">
         <input type="button" class="btn" value="Add Venue">
     </form>
-    <!-- <div class="col s6"> -->
 
     {% for venue in band.venue_set.all %}
     <div class="card">
@@ -18,7 +17,6 @@
             </div>
     </div>
     {% endfor %}
-    <!-- </div> -->
 </div>
 
 {% endblock %}

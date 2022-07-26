@@ -38,6 +38,7 @@ def venues_detail(request, band_id, venue_id):
     'venue': venue 
   })
 
+# GET route that takes the user to the page with the add venue form
 def venues_create(request, band_id):
   band = Band.objects.get(id=band_id)
   venue_form = VenueForm()
@@ -46,21 +47,7 @@ def venues_create(request, band_id):
     'venue_form': venue_form
   })
 
-class BandCreate(CreateView):
-  model = Band
-  fields = '__all__'
-  success_url = '/bands/'
-
-# **NEED TO REMOVE ABILITY TO UPDATE AND DELETE BANDS LATER**
-class BandUpdate(UpdateView):
-  model = Band
-  fields = []
-
-class BandDelete(DeleteView):
-  model = Band
-  success_url = '/bands/'
-# **NEED TO REMOVE ABILITY TO UPDATE AND DELETE BANDS LATER**
-
+# POST route that creates a Venue using the completed form data
 def add_venue(request, band_id):
   # create a ModelForm instance using the data in request.POST
   print('running add venue in views')
@@ -73,3 +60,37 @@ def add_venue(request, band_id):
     new_venue.band_id = band_id
     new_venue.save()
   return redirect('detail', band_id=band_id)
+
+# # POST route that creates a Venue using the completed form data
+# def venues_update(request, band_id, venue_id):
+#   # create a ModelForm instance using the data in request.POST
+#   print('running add venue in views')
+#   form = VenueForm(request.POST)
+#   # validate the form
+#   if form.is_valid():
+#     # don't save the form to the db until it
+#     # has the band_id assigned
+#     new_venue = form.save(commit=False)
+#     new_venue.band_id = band_id
+#     new_venue.save()
+#   return redirect('detail', band_id=band_id)
+
+class BandCreate(CreateView):
+  model = Band
+  fields = '__all__'
+  success_url = '/bands/'
+
+class VenueUpdate(UpdateView):
+  model = Venue
+  fields = '__all__'
+  success_url = '/bands/'
+
+# **NEED TO REMOVE ABILITY TO UPDATE AND DELETE BANDS LATER**
+class BandUpdate(UpdateView):
+  model = Band
+  fields = []
+
+class BandDelete(DeleteView):
+  model = Band
+  success_url = '/bands/'
+# **NEED TO REMOVE ABILITY TO UPDATE AND DELETE BANDS LATER**
