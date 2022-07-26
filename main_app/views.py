@@ -17,17 +17,17 @@ def bands_index(request):
 def venues_index(request, band_id):
   band = Band.objects.get(id=band_id)
   venues = band.venue_set.all()
+  # venue_form = VenueForm()
   return render(request, 'venues/index.html', {
     'venues': venues,
-    'band': band
+    'band': band,
+    # 'venue_form': venue_form
   })
 
 def bands_detail(request, band_id):
   band = Band.objects.get(id=band_id)
-  venue_form = VenueForm()
   return render(request, 'bands/detail.html', { 
     'band': band,
-    'venue_form': venue_form 
   })
 
 def venues_detail(request, band_id, venue_id):
@@ -36,6 +36,14 @@ def venues_detail(request, band_id, venue_id):
   return render(request, 'venues/detail.html', { 
     'band': band,
     'venue': venue 
+  })
+
+def venues_create(request, band_id):
+  band = Band.objects.get(id=band_id)
+  venue_form = VenueForm()
+  return render(request, 'venues/create.html', {
+    'band': band,
+    'venue_form': venue_form
   })
 
 class BandCreate(CreateView):

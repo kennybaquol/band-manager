@@ -12,4 +12,5 @@ urlpatterns = [
     path('bands/<int:band_id>/add_venue/', views.add_venue, name='add_venue'),
     path('venues/<int:band_id>/', views.venues_index, name='venues_index'),
     path('venues/<int:band_id>/<int:venue_id>/', views.venues_detail, name='venues_detail'),
+    path('venues/<int:band_id>/create/', views.venues_create, name='venues_create'),
 ]
