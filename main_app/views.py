@@ -30,6 +30,14 @@ def bands_detail(request, band_id):
     'venue_form': venue_form 
   })
 
+def venues_detail(request, band_id, venue_id):
+  band = Band.objects.get(id=band_id)
+  venue = Venue.objects.get(id=venue_id)
+  return render(request, 'venues/detail.html', { 
+    'band': band,
+    'venue': venue 
+  })
+
 class BandCreate(CreateView):
   model = Band
   fields = '__all__'
