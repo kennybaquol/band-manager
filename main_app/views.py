@@ -61,20 +61,6 @@ def add_venue(request, band_id):
     new_venue.save()
   return redirect('detail', band_id=band_id)
 
-# # POST route that creates a Venue using the completed form data
-# def venues_update(request, band_id, venue_id):
-#   # create a ModelForm instance using the data in request.POST
-#   print('running add venue in views')
-#   form = VenueForm(request.POST)
-#   # validate the form
-#   if form.is_valid():
-#     # don't save the form to the db until it
-#     # has the band_id assigned
-#     new_venue = form.save(commit=False)
-#     new_venue.band_id = band_id
-#     new_venue.save()
-#   return redirect('detail', band_id=band_id)
-
 class BandCreate(CreateView):
   model = Band
   fields = '__all__'
@@ -83,6 +69,10 @@ class BandCreate(CreateView):
 class VenueUpdate(UpdateView):
   model = Venue
   fields = '__all__'
+  success_url = '/bands/'
+
+class VenueDelete(DeleteView):
+  model = Venue
   success_url = '/bands/'
 
 # **NEED TO REMOVE ABILITY TO UPDATE AND DELETE BANDS LATER**

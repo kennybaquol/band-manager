@@ -14,9 +14,8 @@
             <h3>Status: {{ venue.get_status_display }}</h3>
         </div>
         <div class="card-action">
-            <!-- **THESE MUST BE CHANGED TO VENUES UPDATE AND DELETE** -->
             <a href="{% url 'venues_update' band.id venue.id %}">Edit</a>
-            <a href="{% url 'bands_delete' venue.id %}">Delete</a>
+            <a href="{% url 'venues_delete' band.id venue.id %}">Delete</a>
         </div>
     </div>
 </div>
