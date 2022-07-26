@@ -87,6 +87,14 @@ class BandCreate(CreateView):
   fields = '__all__'
   success_url = '/bands/'
 
+  # This inherited method is called when a
+  # valid band form is being submitted
+  def form_valid(self, form):
+    # Assign the logged in user (self.request.user)
+    form.instance.user = self.request.user  # form.instance is the band
+    # Let the CreateView do its job as usual
+    return super().form_valid(form)
+
 class VenueDelete(DeleteView):
   model = Venue
   success_url = '/bands/'
