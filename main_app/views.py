@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Band, Venue
 from .forms import VenueForm
 
@@ -112,9 +113,9 @@ def edit_venue(request, band_id, venue_id):
     venue.save()
   return redirect('detail', band_id=band_id)
 
-class BandCreate(CreateView):
+class BandCreate(LoginRequiredMixin, CreateView):
   model = Band
-  fields = '__all__'
+  fields = ['name']
   success_url = '/bands/'
 
   # This inherited method is called when a
@@ -125,16 +126,16 @@ class BandCreate(CreateView):
     # Let the CreateView do its job as usual
     return super().form_valid(form)
 
-class VenueDelete(DeleteView):
+class VenueDelete(LoginRequiredMixin, DeleteView):
   model = Venue
   success_url = '/bands/'
 
 # **NEED TO REMOVE ABILITY TO UPDATE AND DELETE BANDS LATER**
-class BandUpdate(UpdateView):
+class BandUpdate(LoginRequiredMixin, UpdateView):
   model = Band
   fields = []
 
-class BandDelete(DeleteView):
+class BandDelete(LoginRequiredMixin, DeleteView):
   model = Band
   success_url = '/bands/'
 # **NEED TO REMOVE ABILITY TO UPDATE AND DELETE BANDS LATER**
