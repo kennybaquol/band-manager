@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% if band.user.username == user.username %}
 <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
 
 <form action="{% url 'edit_venue' band.id venue.id %}" method="POST">
@@ -34,6 +35,7 @@
     </p>
     <input type="submit" class="btn" value="Submit Changes">
 </form>
+{% endif %}
 
 <script>
     const status = document.getElementById('id_status');

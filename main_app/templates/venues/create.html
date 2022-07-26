@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% if band.user.username == user.username %}
 <h3>Add A Venue</h3>
 
 <form action="{% url 'add_venue' band.id %}" method="POST">
@@ -8,6 +9,7 @@
     {{ venue_form.as_p }}
     <input type="submit" class="btn" value="Add Venue">
 </form>
+{% endif %}
 
 <script>
     const status = document.getElementById('id_status');

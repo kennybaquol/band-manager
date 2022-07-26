@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
+{% if band.user.username == user.username %}
 <h1>{{ band.name }}</h1>
 
 <div class="row">
-    <li><a href="{% url 'venues_index' band.id %}">View My Venues</a></li>
+    <h4><a href="{% url 'venues_index' band.id %}">Venues</a></h4>
+
 </div>
+
+{% endif %}
 
 {% endblock %}

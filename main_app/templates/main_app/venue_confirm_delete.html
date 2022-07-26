@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if band.user.username == user.username %}
 <h1>Delete Venue</h1>
 
 <h4>Are you sure you want to delete <span class="teal-text">{{ object.name }}</span>?</h4>
@@ -9,6 +10,7 @@
     {% csrf_token %}
     <input type="submit" value="Yes - Delete!" class="btn">
 </form>
+{% endif %}
 
 {% endblock %}
 
