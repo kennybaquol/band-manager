@@ -7,6 +7,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Band, Venue
 from .forms import VenueForm
 
+from .serializers import BandSerializer
+from rest_framework import viewsets
+
+class BandViewSet(viewsets.ModelViewSet):
+  serializer_class = BandSerializer
+  queryset = Band.objects.all()
+
 def signup(request):
   error_message = ''
   if request.method == 'POST':
