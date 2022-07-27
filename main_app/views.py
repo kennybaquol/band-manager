@@ -8,11 +8,15 @@ from .models import Band, Venue
 from .forms import VenueForm
 
 from .serializers import BandSerializer
-from rest_framework import viewsets
+from rest_framework import generics
 
-class BandViewSet(viewsets.ModelViewSet):
-  serializer_class = BandSerializer
+# class BandViewSet(viewsets.ModelViewSet):
+#   serializer_class = BandSerializer
+#   queryset = Band.objects.all()
+
+class BandView(generics.ListAPIView):
   queryset = Band.objects.all()
+  serializer_class = BandSerializer
 
 def signup(request):
   error_message = ''
