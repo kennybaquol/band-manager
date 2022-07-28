@@ -1,16 +1,17 @@
-import React, { Component } from "react"
+import React from "react"
 import { render } from "react-dom"
+import Home from "./Home"
 
-export default class App extends Component {
-    constructor(props) {
-        super(props)
-    }
 
-    render() {
-        return(
-            <h1>Testing React Code</h1>
+export default function App() {
+        return (
+            <div>
+                <Home />
+                <h1>Testing React Code Shorty Got A Lot</h1>
+                <a href="home/">Lel</a>
+                <h4>Testing More Shorties</h4>
+            </div>
         )
-    }
 }
 
 const appDiv = document.getElementById('app')
