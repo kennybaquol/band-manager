@@ -5,3 +5,8 @@ class BandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Band
         fields = ['name']
+
+class CreateBandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Band
+        fields = ['name']

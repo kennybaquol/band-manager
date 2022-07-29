@@ -7,8 +7,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Band, Venue
 from .forms import VenueForm
 
-from .serializers import BandSerializer
-from rest_framework import generics
+from .serializers import BandSerializer, CreateBandSerializer
+from rest_framework import generics, status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 # class BandViewSet(viewsets.ModelViewSet):
 #   serializer_class = BandSerializer
@@ -17,6 +19,35 @@ from rest_framework import generics
 class BandView(generics.ListAPIView):
   queryset = Band.objects.all()
   serializer_class = BandSerializer
+
+class CreateBandView(APIView):
+  serializer_class = CreateBandSerializer
+  
+  def post(self, request, format=None):
+    if not self.request.session.exists(self.request.session.session_key):
+      self.request.session.create()
+    
+    serializer = self.serializer_class(data=request.data)
+    if serializer.is_valid():
+      name = serializer.data.get('name')
+      # user = self.request.session.session_key
+      user = serializer.data.get('user')
+      queryset = Band.objects.filter(user=user)
+      if queryset.exists():
+        band = queryset[0]
+        band.name = name
+        band.user = user
+        band.save(update_fields='__all__')
+      else:
+        band = Band(name=name, user=user)
+
+      return Response(BandSerializer(band).data, status=status.HTTP_201_CREATED)
+
+    return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
 
 def signup(request):
   error_message = ''
