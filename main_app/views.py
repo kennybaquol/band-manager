@@ -23,18 +23,24 @@ class BandView(generics.ListAPIView):
 class GetBand(APIView):
   serializer_class = BandSerializer
   lookup_url_kwarg = 'id'
+  print('RUNNING GET BAND API VIEW')
 
   def get(self, request, format=None):
     id = request.GET.get(self.lookup_url_kwarg)
-    if code != None:
-      band = Band.objects.filter(id=id)
-      if len(band) > 0:
-        data = BandSerializer(band[0]).data
-        data['user'] = self.request.session.session_key == band[0].user
+    print(id)
+    if id != None:
+      band = Band.objects.get(id=id)
+      # band = Band.objects.get(name="Confined")
+      print(band)
+      # if len(band) > 0:
+      if band:
+        data = BandSerializer(band).data
+        print(data)
+        # data['user'] = self.request.session.session_key == band[0].user
         return Response(data, status=status.HTTP_200_OK)
       return Response({'Bad Request': 'Invalid Band Id'}, status=status.HTTP_404_NOT_FOUND)
     
-    return Response({'Bad Request': 'Code paramter not found in request'}, status=status.HTTP_400_BAD_REQUEST)
+    return Response({'Bad Request': 'Band paramter not found in request'}, status=status.HTTP_400_BAD_REQUEST)
 
 class CreateBandView(APIView):
   serializer_class = CreateBandSerializer

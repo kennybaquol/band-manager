@@ -8,10 +8,12 @@ export default function BandsDetail() {
 
     useEffect(() => {
         (async () => {
-            fetch('/main_app/get-band' + '?id=' + this.id)
-                .then((response) => response.json)
+            console.log('Running banddetail useEffect!')
+            fetch('/main_app/get-band' + '?id=' + id)
+                .then(res => res.json())
                 .then((data) => {
-                    // this
+                    console.log(data)
+                    setBand(data)
                 })
         })()
     }, [])
@@ -19,8 +21,7 @@ export default function BandsDetail() {
     return (
         <div>
             <h3>Band Name Here</h3>
-            <h5>{ band.name }: { band.user}</h5>
-            <h6>{ id }</h6>
+            <h5>{ band.name }</h5>
         </div>
     )
 }
