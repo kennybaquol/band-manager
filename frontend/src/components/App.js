@@ -16,13 +16,10 @@ export default function App() {
         <div>
             <Router>
                 <Switch>
-                    <Route path="/" component={BandsDetail} />
-                    
+                    <Route exact path="/" component={Home} />
+                    <Route path="/bands/:id" component={BandsDetail} />
                 </Switch>
             </Router>
-            <h1>Testing React Code Shorty Got A Lotzzzzzz</h1>
-            <a href="home/">Lel</a>
-            <h4>Testing More July 29</h4>
 
             <footer class="page-footer">
                 <div>All Rights Reserved, &copy; 2022 Band Manager &nbsp;</div>
