@@ -2,20 +2,22 @@ import React from "react"
 import { render } from "react-dom"
 import Home from "./Home"
 import NavBar from "./NavBar"
+import BandsDetail from "./BandsDetail"
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     // Link,
     // Redirect,
-} from "react-router-dom";
+} from "react-router-dom"
 
 export default function App() {
     return (
         <div>
             <Router>
                 <Switch>
-                    <Home />
+                    <Route path="/" component={BandsDetail} />
+                    
                 </Switch>
             </Router>
             <h1>Testing React Code Shorty Got A Lotzzzzzz</h1>
