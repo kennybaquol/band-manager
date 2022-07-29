@@ -22,7 +22,6 @@ export default function NavBar() {
                         {/* {% endif %} */}
                     </ul>
                 </div>
-                <h3>RENDERING NAV BAR</h3>
             </nav>
         </header>
     )
