@@ -1,7 +1,7 @@
 import React from "react"
 import { render } from "react-dom"
 import Home from "./Home"
-// import NavBar from "./NavBar"
+import NavBar from "./NavBar"
 import {
     BrowserRouter as Router,
     Switch,
@@ -16,7 +16,7 @@ export default function App() {
             <Router>
                 <Switch>
                     {/* <Route exact path="/"> */}
-                        {/* <NavBar /> */}
+                        <NavBar />
                     {/* </Route> */}
                     {/* <Route path="/join" component={RoomJoinPage} />
                     <Route path="/create" component={CreateRoomPage} /> */}
