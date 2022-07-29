@@ -10,15 +10,15 @@ from . import views
 
 urlpatterns = [
     # path('', include(urlpatterns)),
-    # path('', views.home, name='home'),
+    path('', views.home, name='home'),
     path('bands', BandView.as_view()),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', views.signup, name='signup'),
     path('about/', views.about, name='about'),
-    # path('bands/', views.bands_index, name='bands_index'),
+    path('bands/', views.bands_index, name='bands_index'),
     path('bands/<int:band_id>/', views.bands_detail, name='detail'),
     path('bands/create', CreateBandView.as_view()),
-    # path('bands/create/', views.BandCreate.as_view(), name='bands_create'),
+    path('bands/create/', views.BandCreate.as_view(), name='bands_create'),
     path('bands/<int:pk>/update/', views.BandUpdate.as_view(), name='bands_update'),
     path('bands/<int:pk>/delete/', views.BandDelete.as_view(), name='bands_delete'),
     path('bands/<int:band_id>/add_venue/', views.add_venue, name='add_venue'),
