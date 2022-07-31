@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
-// import { useParams } from 'react-router-dom'
+import React, { useState } from 'react'
 
 export default function BandsDetail() {
     const [name, setName] = useState('')
-    // const { id } = useParams()
 
     // SOURCE: https://www.techiediaries.com/django-react-forms-csrf-axios/
     // Get the csrf token to use when using the POST method
@@ -24,7 +22,6 @@ export default function BandsDetail() {
     }
 
     const handleChange = async (e) => {
-        // e.preventDefault()
         setName({ ...name, [e.target.name]: e.target.value })
         console.log(name)
     }
@@ -39,16 +36,13 @@ export default function BandsDetail() {
                 "Content-Type": "application/json",
                 "X-CSRFToken": csrftoken
             },
-            body: JSON.stringify({
-                name: name
-            }),
+            body: JSON.stringify(name),
         };
         fetch("/main_app/create-band", requestOptions)
             .then((res) => res.json())
             .then((data) => {
                 // this.props.history.push("/room/" + data.code)
                 console.log(data)
-                console.log('LEL')
             })
     }
 
@@ -58,7 +52,7 @@ export default function BandsDetail() {
 
             {/* <!-- Leaving the action empty makes the form post to the same url used to display it --> */}
             <form onSubmit={handleSubmit}>
-                Name: <input type="text" onChange={handleChange} />
+                Name: <input type="text" onChange={handleChange} name="name"/>
                 <input type="submit" value="Add Band!" class="btn" />
             </form>
             <br /><br />

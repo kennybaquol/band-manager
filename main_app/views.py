@@ -70,22 +70,29 @@ class CreateBandView(APIView):
   serializer_class = CreateBandSerializer
   
   def post(self, request, format=None):
+    print('Running CreateBandView')
     if not self.request.session.exists(self.request.session.session_key):
       self.request.session.create()
     
     serializer = self.serializer_class(data=request.data)
+    print(serializer)
+    print('Checking if the serializer is valid')
     if serializer.is_valid():
       name = serializer.data.get('name')
-      # user = self.request.session.session_key
-      user = serializer.data.get('user')
+      user = self.request.session.session_key
+      # user = serializer.data.get('user')
       queryset = Band.objects.filter(user=user)
+      print('Checking if the queryset exists')
       if queryset.exists():
+        print('Exists')
         band = queryset[0]
         band.name = name
         band.user = user
         band.save(update_fields='__all__')
       else:
+        print('Does not exist')
         band = Band(name=name, user=user)
+        band.save()
 
       return Response(BandSerializer(band).data, status=status.HTTP_201_CREATED)
 

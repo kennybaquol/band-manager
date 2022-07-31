@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import AuthContext from '../context/AuthContext'
 
 export default function BandsDetail() {
     const [bands, setBands] = useState([])
+
+    let {user} = useContext(AuthContext)
 
     // Upon first load, get all of the user's bands
     useEffect(() => {
@@ -28,7 +31,7 @@ export default function BandsDetail() {
                                 <div class="card-content">
                                     <span class="card-title">{band.name}</span>
                                     <p>Members: </p>
-                                    <p>Put Memebers Names Here</p>
+                                    <p>{user}</p>
                                 </div>
                             </Link>
                         </div>
