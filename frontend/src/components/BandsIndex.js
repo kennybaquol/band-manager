@@ -1,27 +1,25 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function BandsDetail() {
     const [bands, setBands] = useState([])
 
-    // const { id } = useParams()
-
+    // Upon first load, get all of the user's bands
     useEffect(() => {
         (async () => {
-            console.log('Running BandsIndex useEffect!')
             fetch('/main_app/get-all-bands')
                 .then(res => res.json())
                 .then((data) => {
-                    console.log(data)
                     setBands(data)
                 })
         })()
     }, [])
 
+    // For every band that belongs to the user, 
+    // list a card that links to each band's detail page
     return (
         <div>
             <h1>My Bands</h1>
-
             {bands.length > 0 ?
                 <>
                     {bands.map(band => (
@@ -39,7 +37,6 @@ export default function BandsDetail() {
                 :
                 <h3>No Bands Found</h3>
             }
-
         </div>
     )
 }
