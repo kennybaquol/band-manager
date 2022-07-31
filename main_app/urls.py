@@ -15,6 +15,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', views.signup, name='signup'),
     path('about/', views.about, name='about'),
+    path('get-all-bands/', GetAllBands.as_view()),
     path('bands/', views.bands_index, name='bands_index'),
     path('get-band/', GetBand.as_view()),
     path('bands/<int:band_id>/', views.bands_detail, name='detail'),

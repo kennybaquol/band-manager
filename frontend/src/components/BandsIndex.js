@@ -2,18 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 export default function BandsDetail() {
-    const [band, setBand] = useState({ name: 'Lel', user: 'Bo Bell' })
+    const [bands, setBands] = useState({ name: 'Lel', user: 'Bo Bell' })
 
-    const { id } = useParams()
+    // const { id } = useParams()
 
     useEffect(() => {
+        console.log('bands index has loaded')
         (async () => {
-            console.log('Running banddetail useEffect!')
-            fetch('/main_app/get-band' + '?id=' + id)
+            console.log('Running BandsIndex useEffect!')
+            fetch('/main_app/get-all-bands')
                 .then(res => res.json())
                 .then((data) => {
                     console.log(data)
-                    setBand(data)
+                    setBands(data)
                 })
         })()
     }, [])
@@ -21,9 +22,9 @@ export default function BandsDetail() {
     return (
         <div>
             {/* {% if band.user.username == user.username %} */}
-            <h1>{ band.name }</h1>
+            {/* <h1>{ bands[0].name }</h1> */}
             <div class="row">
-                <h4><Link to={`${id}/venues`}>Venues</Link></h4>
+                <h4><Link to={`${data}`}>Venues</Link></h4>
                 
             </div>
         </div>

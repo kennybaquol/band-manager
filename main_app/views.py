@@ -12,6 +12,8 @@ from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from operator import length_hint
+
 # class BandViewSet(viewsets.ModelViewSet):
 #   serializer_class = BandSerializer
 #   queryset = Band.objects.all()
@@ -23,7 +25,6 @@ class BandView(generics.ListAPIView):
 class GetBand(APIView):
   serializer_class = BandSerializer
   lookup_url_kwarg = 'id'
-  print('RUNNING GET BAND API VIEW')
 
   def get(self, request, format=None):
     id = request.GET.get(self.lookup_url_kwarg)
@@ -41,6 +42,29 @@ class GetBand(APIView):
       return Response({'Bad Request': 'Invalid Band Id'}, status=status.HTTP_404_NOT_FOUND)
     
     return Response({'Bad Request': 'Band paramter not found in request'}, status=status.HTTP_400_BAD_REQUEST)
+
+class GetAllBands(APIView):
+  serializer_class = BandSerializer
+
+  def get(self, request, format=None):
+
+    # bands = []
+    # for band in Band.objects.filter():
+    #   bands.append(band)
+
+    bands = Band.objects.filter()
+
+    print(bands)
+    if bands:
+      data = []
+      for idx, band in enumerate(bands):
+        currentBandData = BandSerializer(bands[idx]).data
+        data.append(currentBandData)
+      # data['user'] = self.request.session.session_key == band[0].user
+      return Response(data, status=status.HTTP_200_OK)
+    # return Response({'Bad Request': 'Invalid Band Id'}, status=status.HTTP_404_NOT_FOUND)
+    
+    return Response({'Bad Request': ''}, status=status.HTTP_400_BAD_REQUEST)
 
 class CreateBandView(APIView):
   serializer_class = CreateBandSerializer

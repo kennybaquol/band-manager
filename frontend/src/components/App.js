@@ -3,6 +3,8 @@ import { render } from "react-dom"
 import Home from "./Home"
 import NavBar from "./NavBar"
 import BandsDetail from "./BandsDetail"
+import BandsIndex from "./BandsIndex"
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -22,8 +24,8 @@ export default function App() {
                             <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Band Manager</a></li>
                         </ul>
                         <ul class="right">
-                            <li><Link to='/home'>Fake Home Link</Link></li>
-                            <li><Link to='/about'>Fake About Link</Link></li>
+                            {/* <li><Link to='/home'>Fake Home Link</Link></li>
+                            <li><Link to='/about'>Fake About Link</Link></li> */}
                             {/* {% if user.is_authenticated %} */}
                             <li><Link to='/bands'>Add A Band</Link></li>
                             <li><Link to='/about'>View My Bands</Link></li>
@@ -39,6 +41,7 @@ export default function App() {
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/bands/:id" component={BandsDetail} />
+                    <Route path="/bands" component={BandsIndex} />
                 </Switch>
             </Router>
 
