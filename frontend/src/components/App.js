@@ -1,7 +1,8 @@
-import React from "react"
+import React, {useContext} from "react"
 import { render } from "react-dom"
 import PrivateRoute from "../utils/PrivateRoute"
-import AuthProvider from "../context/AuthContext"
+import AuthContext from "../context/AuthContext"
+import { AuthProvider } from "../context/AuthContext"
 
 import Home from "./Home"
 import BandsDetail from "./BandsDetail"
@@ -18,6 +19,7 @@ import {
 import Login from "./Registration/login"
 
 export default function App() {
+
     return (
         <div>
             <Router>
