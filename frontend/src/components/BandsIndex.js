@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 export default function BandsDetail() {
-    const [bands, setBands] = useState({ name: 'Lel', user: 'Bo Bell' })
+    const [bands, setBands] = useState([])
 
     // const { id } = useParams()
 
     useEffect(() => {
-        console.log('bands index has loaded')
         (async () => {
             console.log('Running BandsIndex useEffect!')
             fetch('/main_app/get-all-bands')
@@ -21,12 +20,26 @@ export default function BandsDetail() {
 
     return (
         <div>
-            {/* {% if band.user.username == user.username %} */}
-            {/* <h1>{ bands[0].name }</h1> */}
-            <div class="row">
-                <h4><Link to={`${data}`}>Venues</Link></h4>
-                
-            </div>
+            <h1>My Bands</h1>
+
+            {bands.length > 0 ?
+                <>
+                    {bands.map(band => (
+                        <div class="card">
+                            <Link to={`${band.id}`}>
+                                <div class="card-content">
+                                    <span class="card-title">{band.name}</span>
+                                    <p>Members: </p>
+                                    <p>Put Memebers Names Here</p>
+                                </div>
+                            </Link>
+                        </div>
+                    ))}
+                </>
+                :
+                <h3>No Bands Found</h3>
+            }
+
         </div>
     )
 }
