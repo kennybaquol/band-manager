@@ -1,9 +1,9 @@
 import React from "react"
 import { render } from "react-dom"
 import Home from "./Home"
-import NavBar from "./NavBar"
 import BandsDetail from "./BandsDetail"
 import BandsIndex from "./BandsIndex"
+import BandForm from "./BandsCreate"
 
 import {
     BrowserRouter as Router,
@@ -27,8 +27,8 @@ export default function App() {
                             {/* <li><Link to='/home'>Fake Home Link</Link></li>
                             <li><Link to='/about'>Fake About Link</Link></li> */}
                             {/* {% if user.is_authenticated %} */}
-                            <li><Link to='/bands'>Add A Band</Link></li>
-                            <li><Link to='/about'>View My Bands</Link></li>
+                            <li><Link to='/bands/create'>Add A Band</Link></li>
+                            <li><Link to='/bands'>View My Bands</Link></li>
                             <li><Link to='/logout'>Logout</Link></li>
                             {/* {% else %} */}
                             <li><Link to='/signup'>Sign Up</Link></li>
@@ -40,6 +40,7 @@ export default function App() {
             </header>
                 <Switch>
                     <Route exact path="/" component={Home} />
+                    <Route path='/bands/create' component={BandForm} />
                     <Route path="/bands/:id" component={BandsDetail} />
                     <Route path="/bands" component={BandsIndex} />
                 </Switch>
