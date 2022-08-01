@@ -25,13 +25,11 @@ export const AuthProvider = ({ children }) => {
         //     .then((data) => {
         //         console.log(data)
         //     })
+        return 'K Moniessss'
     }
 
-    const contextData = () => {
-        // loginUser: loginUser
-        // 'name': 'kbaquol'
-        console.log("running contextData!")
-        return 'kbaquol'
+    const contextData = {
+        loginUser: loginUser
     }
 
     console.log('Loading AuthProvider')
@@ -39,7 +37,7 @@ export const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={"kbaquol"}>
+        <AuthContext.Provider value={contextData}>
             {children}
         </AuthContext.Provider>
     )
