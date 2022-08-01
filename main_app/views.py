@@ -4,10 +4,10 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Band, Venue
+from .models import *
 from .forms import VenueForm
 
-from .serializers import BandSerializer, CreateBandSerializer
+from .serializers import *
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -71,16 +71,19 @@ class CreateBandView(APIView):
   
   def post(self, request, format=None):
     print('Running CreateBandView')
-    if not self.request.session.exists(self.request.session.session_key):
-      self.request.session.create()
+    # if not self.request.session.exists(self.request.session.session_key):
+    #   self.request.session.create()
     
     serializer = self.serializer_class(data=request.data)
     print(serializer)
     print('Checking if the serializer is valid')
     if serializer.is_valid():
       name = serializer.data.get('name')
-      user = self.request.session.session_key
+      # user = self.request.session.session_key
       # user = serializer.data.get('user')
+      print(request)
+      user = request.user
+      print(user)
       queryset = Band.objects.filter(user=user)
       print('Checking if the queryset exists')
       if queryset.exists():
