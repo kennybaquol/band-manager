@@ -36,6 +36,7 @@ urlpatterns = [
     path('bands/<int:band_id>/add_venue/', views.add_venue, name='add_venue'),
     path('bands/<int:band_id>/get-venues/', GetVenues.as_view()),
     path('bands/<int:band_id>/venues/', views.venues_index, name='venues_index'),
+    path('bands/<int:band_id>/get-venue/', GetVenue.as_view()),
     path('bands/<int:band_id>/venues/<int:venue_id>/', views.venues_detail, name='venues_detail'),
     path('bands/<int:band_id>/venues/create/', views.venues_create, name='venues_create'),
     path('bands/<int:band_id>/venues/<int:venue_id>/update/', views.venues_update, name='venues_update'),
