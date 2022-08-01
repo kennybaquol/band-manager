@@ -5,7 +5,8 @@ import AuthContext from '../context/AuthContext'
 export default function BandsDetail() {
     const [bands, setBands] = useState([])
 
-    // let {user} = useContext(AuthContext)
+    // let user = 'Shorty'
+    let user = useContext(AuthContext)
 
     // Upon first load, get all of the user's bands
     useEffect(() => {
@@ -18,11 +19,17 @@ export default function BandsDetail() {
         })()
     }, [])
 
+    useEffect(() => {
+        (async () => {
+            console.log(user)
+        })()
+    }, [user])
+
     // For every band that belongs to the user, 
     // list a card that links to each band's detail page
     return (
         <div>
-            <h1>My Bands</h1>
+            <h1>My Bands {user}</h1>
             {bands.length > 0 ?
                 <>
                     {bands.map(band => (
@@ -31,7 +38,7 @@ export default function BandsDetail() {
                                 <div class="card-content">
                                     <span class="card-title">{band.name}</span>
                                     <p>Members: </p>
-                                    <p>Username here</p>
+                                    <p>{user}</p>
                                 </div>
                             </Link>
                         </div>

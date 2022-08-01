@@ -3,8 +3,7 @@ import jwt_decode from "jwt-decode";
 import { useHistory } from 'react-router-dom'
 
 // SOURCE: https://www.youtube.com/watch?v=xjMP0hspNLE&t=7099s
-// const AuthContext = createContext()
-const AuthContext = createContext()
+const AuthContext = createContext(null)
 
 export default AuthContext
 
@@ -28,12 +27,19 @@ export const AuthProvider = ({ children }) => {
         //     })
     }
 
-    let contextData = {
-        loginUser: loginUser
+    const contextData = () => {
+        // loginUser: loginUser
+        // 'name': 'kbaquol'
+        console.log("running contextData!")
+        return 'kbaquol'
     }
 
+    console.log('Loading AuthProvider')
+    console.log(children)
+
+
     return (
-        <AuthContext.Provider value={{ 'name': 'kbaquol' }}>
+        <AuthContext.Provider value={"kbaquol"}>
             {children}
         </AuthContext.Provider>
     )
