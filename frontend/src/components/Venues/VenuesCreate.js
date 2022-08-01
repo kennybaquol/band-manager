@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom'
 export default function VenuesCreate() {
     const [venue, setVenue] = useState([])
     const { band_id } = useParams()
-    const [selectedOption, setSelectedOption] = useState({})
     const options = [
         { value: 'Not Contacted', label: 'Not Contacted' },
         { value: 'Contacted', label: 'Contacted' },
@@ -13,6 +12,7 @@ export default function VenuesCreate() {
         { value: 'Successfully Booked', label: 'Successfully Booked' },
         { value: 'Not Going To Work', label: 'Not Going To Work' },
     ]
+    const [selectedOption, setSelectedOption] = useState(options[0].value)
 
     // SOURCE: https://www.techiediaries.com/django-react-forms-csrf-axios/
     // Get the csrf token to use when using the POST method
@@ -66,7 +66,7 @@ export default function VenuesCreate() {
     useEffect(() => {
         (async () => {
             setSelectedOption(options[0].value)
-            // setVenue({...venue, ['band_id']: band_id})
+            setVenue({...venue, ['status']: selectedOption})
         })()
     }, [])
 
