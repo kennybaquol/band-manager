@@ -45,15 +45,15 @@ export default function App() {
                         </div>
                     </nav>
                 </header>
-                    <AuthProvider>
-                <Switch>
+                <AuthProvider>
+                    <Switch>
                         <Route exact path="/" component={Home} />
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/bands" component={BandsIndex} />
                         <Route exact path="/bands/create" component={BandForm} />
                         <Route exact path="/bands/:id" component={BandsDetail} />
-                </Switch>
-                    </AuthProvider>
+                    </Switch>
+                </AuthProvider>
             </Router>
 
             <footer class="page-footer">

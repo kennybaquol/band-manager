@@ -34,7 +34,7 @@ export default function BandsDetail() {
                 <>
                     {bands.map(band => (
                         <div class="card">
-                            <Link to={`${band.id}`}>
+                            <Link to={`/bands/${band.id}`}>
                                 <div class="card-content">
                                     <span class="card-title">{band.name}</span>
                                     <p>Members: </p>

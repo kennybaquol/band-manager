@@ -82,10 +82,11 @@ class CreateBandView(APIView):
       # user = self.request.session.session_key
       # user = serializer.data.get('user')
       print(request)
-      user = request.user
+      user = User.objects.first()
       print(user)
-      queryset = Band.objects.filter(user=user)
+      queryset = Band.objects.filter(name=name)
       print('Checking if the queryset exists')
+      print(queryset)
       if queryset.exists():
         print('Exists')
         band = queryset[0]
