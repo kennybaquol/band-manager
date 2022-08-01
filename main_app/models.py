@@ -9,11 +9,11 @@ from django.contrib.auth.models import (
 )
 
 STATUSES = (
-    ('N', 'Not Contacted'),
-    ('C', 'Contacted'),
-    ('F', 'Followed Up With'),
-    ('B', 'Successfully Booked'),
-    ('X', 'Not Going To Work')
+    ('Not Contacted', 'Not Contacted'),
+    ('Contacted', 'Contacted'),
+    ('Followed Up With', 'Followed Up With'),
+    ('Successfully Booked', 'Successfully Booked (B)'),
+    ('Not Going To Work', 'Not Going To Work (X)')
 )
 
 class Band(models.Model):

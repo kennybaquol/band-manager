@@ -21,24 +21,27 @@ export default function VenuesIndex() {
 
     // useEffect(() => {
     //     (async () => {
-    //         console.log(user)
+    //         console.log('venues updated')
+    //         console.log(venues)
+    //         console.log(venues[0].status)
     //     })()
-    // }, [user])
+    // }, [venues])
 
     // For every band that belongs to the user, 
     // list a card that links to each band's detail page
     return (
         <div>
-            <h1>My Bands</h1>
+            <h2>Venues</h2>
             {venues.length > 0 ?
                 <>
                     {venues.map(venue => (
                         <div class="card">
-                            <Link to={`/venues/${venue.id}`}>
+                            <Link to={`/bands/${id}/venues/${venue.id}`}>
                                 <div class="card-content">
                                     <span class="card-title">{venue.name}</span>
-                                    <p>Members: </p>
-                                    <p></p>
+                                    <div class="card-content">
+                                        <p>{venue.status}</p>
+                                    </div>
                                 </div>
                             </Link>
                         </div>
@@ -48,5 +51,6 @@ export default function VenuesIndex() {
                 <h3>No Venues Found</h3>
             }
         </div>
+
     )
 }
