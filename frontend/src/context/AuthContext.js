@@ -47,19 +47,27 @@ export const AuthProvider = ({ children }) => {
         //     console.log(data)
         // })
         let data = await response.json()
-        console.log(data)
+        if (response.status === 200) {
+            setAuthTokens(data)
+            setUser(jwt_decode(data.access))
+        } else {
+            alert('something went wrong!')
+        }
     }
 
     const contextData = {
+        user: user,
         loginUser: loginUser
     }
 
-    console.log('Loading AuthProvider')
-    console.log(children)
-
+    useEffect(() => {
+        (async () => {
+            console.log(user)
+        })()
+    }, [user])
 
     return (
-        <AuthContext.Provider value={contextData}>
+        <AuthContext.Provider value={"Kenny"}>
             {children}
         </AuthContext.Provider>
     )
