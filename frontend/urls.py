@@ -6,7 +6,8 @@ urlpatterns = [
     path('login/', index),
     path('signup/', index),
     path('bands/create', index),
-    path('bands/<int:id>', index),
+    path('bands/<int:band_id>', index),
     path('bands/', index),
-    path('bands/<int:id>/venues', index)
+    path('bands/<int:band_id>/venues/<int:venue_id>', index),
+    path('bands/<int:band_id>/venues/', index),
 ]

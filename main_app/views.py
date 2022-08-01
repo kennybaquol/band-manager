@@ -130,14 +130,14 @@ class GetVenue(APIView):
 
   def get(self, request, *args, **kwargs):
     print('Running GetVenue API View')
-    venues = Venue.objects.filter()
 
-    print(venues)
-    if venues:
-      data = []
-      for idx, venue in enumerate(venues):
-        currentVenueData = VenueSerializer(venues[idx]).data
-        data.append(currentVenueData)
+    band_id = kwargs['band_id']
+    venue_id = kwargs['venue_id']
+    venue = Venue.objects.get(id=venue_id)
+
+    print(venue)
+    if venue:
+      data = VenueSerializer(venue).data
       # data['user'] = self.request.session.session_key == band[0].user
       return Response(data, status=status.HTTP_200_OK)
     # return Response({'Bad Request': 'Invalid Band Id'}, status=status.HTTP_404_NOT_FOUND)

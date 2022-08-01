@@ -1,17 +1,12 @@
 from django.contrib import admin
 from django.urls import path, include
 from .views import *
-# from rest_framework.routers import DefaultRouter
 from . import views
 
 from rest_framework_simplejwt.views import(
     TokenObtainPairView,
     TokenRefreshView
 )
-
-# router = DefaultRouter()
-# router.register(r'bands', views.BandViewSet, basename='band')
-# urlpatterns = router.urls
 
 urlpatterns = [
     # path('', include(urlpatterns)),
@@ -35,8 +30,8 @@ urlpatterns = [
 
     path('bands/<int:band_id>/add_venue/', views.add_venue, name='add_venue'),
     path('bands/<int:band_id>/get-venues/', GetVenues.as_view()),
+    path('bands/<int:band_id>/venues/<int:venue_id>/get-venue/', GetVenue.as_view()),
     path('bands/<int:band_id>/venues/', views.venues_index, name='venues_index'),
-    path('bands/<int:band_id>/get-venue/', GetVenue.as_view()),
     path('bands/<int:band_id>/venues/<int:venue_id>/', views.venues_detail, name='venues_detail'),
     path('bands/<int:band_id>/venues/create/', views.venues_create, name='venues_create'),
     path('bands/<int:band_id>/venues/<int:venue_id>/update/', views.venues_update, name='venues_update'),

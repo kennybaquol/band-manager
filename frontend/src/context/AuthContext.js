@@ -28,16 +28,6 @@ export const AuthProvider = ({ children }) => {
         return cookieValue;
     }
 
-    // const handleChange = async (e) => {
-    //     setName({ ...name, [e.target.name]: e.target.value })
-    //     console.log(name)
-    // }
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault()
-    //     const csrftoken = await getCookie('csrftoken');
-    // }
-
     let loginUser = async (e) => {
         e.preventDefault()
         const csrftoken = await getCookie('csrftoken');
