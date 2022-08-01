@@ -34,6 +34,11 @@ export default function VenuesIndex() {
             <h2>Venues</h2>
             {venues.length > 0 ?
                 <>
+                    <div class="row">
+                        <Link to={`/bands/${id}/venues/create`}>
+                            <input type="button" class="btn" value="Add Venue" />
+                        </Link>
+                    </div>
                     {venues.map(venue => (
                         <div class="card">
                             <Link to={`/bands/${id}/venues/${venue.id}`}>

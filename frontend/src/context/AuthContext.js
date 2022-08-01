@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
                 'Content-Type': 'application/json',
                 "X-CSRFToken": csrftoken
             },
-            body: JSON.stringify({ 'username': e.target.username.value, 'password': e.target.username.value })
+            body: JSON.stringify({ 'username': e.target.username.value, 'password': e.target.password.value })
         })
         // .then((res) => res.json())
         // .then((data) => {
