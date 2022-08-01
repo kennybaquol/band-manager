@@ -102,8 +102,24 @@ class CreateBandView(APIView):
 
     return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
+class GetVenues(APIView):
+  serializer_class = VenueSerializer
 
+  def get(self, request, *args, **kwargs):
+    print('Running GetVenues API View')
+    venues = Venue.objects.filter()
 
+    print(venues)
+    if venues:
+      data = []
+      for idx, venue in enumerate(venues):
+        currentVenueData = VenueSerializer(venues[idx]).data
+        data.append(currentVenueData)
+      # data['user'] = self.request.session.session_key == band[0].user
+      return Response(data, status=status.HTTP_200_OK)
+    # return Response({'Bad Request': 'Invalid Band Id'}, status=status.HTTP_404_NOT_FOUND)
+    
+    return Response({'Bad Request': ''}, status=status.HTTP_400_BAD_REQUEST)
 
 
 

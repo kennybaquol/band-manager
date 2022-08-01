@@ -16,6 +16,7 @@ import {
     // Redirect,
 } from "react-router-dom"
 import Login from "./Registration/login"
+import VenuesIndex from "./Venues/VenuesIndex"
 
 export default function App() {
     // let { user } = useContext(AuthContext)
@@ -52,6 +53,7 @@ export default function App() {
                         <Route exact path="/bands" component={BandsIndex} />
                         <Route exact path="/bands/create" component={BandForm} />
                         <Route exact path="/bands/:id" component={BandsDetail} />
+                        <Route exact path="/bands/:id/venues" component={VenuesIndex} />
                     </Switch>
                 </AuthProvider>
             </Router>

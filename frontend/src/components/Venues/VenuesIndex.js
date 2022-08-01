@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import AuthContext from '../context/AuthContext'
+import { Link, useParams } from 'react-router-dom'
 
-export default function BandsIndex() {
-    const [bands, setBands] = useState([])
+export default function VenuesIndex() {
+    const [venues, setVenues] = useState([])
+    const { id } = useParams()
 
     // let user = 'Shorty'
     // let user = useContext(AuthContext)
@@ -11,10 +11,10 @@ export default function BandsIndex() {
     // Upon first load, get all of the user's bands
     useEffect(() => {
         (async () => {
-            fetch('/main_app/get-all-bands')
+            fetch(`/main_app/bands/${id}/get-venues/`)
                 .then(res => res.json())
                 .then((data) => {
-                    setBands(data)
+                    setVenues(data)
                 })
         })()
     }, [])
@@ -30,13 +30,13 @@ export default function BandsIndex() {
     return (
         <div>
             <h1>My Bands</h1>
-            {bands.length > 0 ?
+            {venues.length > 0 ?
                 <>
-                    {bands.map(band => (
+                    {venues.map(venue => (
                         <div class="card">
-                            <Link to={`/bands/${band.id}`}>
+                            <Link to={`/venues/${venue.id}`}>
                                 <div class="card-content">
-                                    <span class="card-title">{band.name}</span>
+                                    <span class="card-title">{venue.name}</span>
                                     <p>Members: </p>
                                     <p></p>
                                 </div>
@@ -45,7 +45,7 @@ export default function BandsIndex() {
                     ))}
                 </>
                 :
-                <h3>No Bands Found</h3>
+                <h3>No Venues Found</h3>
             }
         </div>
     )

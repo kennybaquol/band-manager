@@ -7,5 +7,6 @@ urlpatterns = [
     path('signup/', index),
     path('bands/create', index),
     path('bands/<int:id>', index),
-    path('bands/', index)
+    path('bands/', index),
+    path('bands/<int:id>/venues', index)
 ]
