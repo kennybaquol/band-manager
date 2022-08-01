@@ -75,6 +75,14 @@ export default function VenuesUpdate() {
         })()
     }, [])
 
+    // For testing*
+    useEffect(() => {
+        (async () => {
+            console.log("Venue:")
+            console.log(venue)
+        })()
+    }, [venue])
+
     return (
         <div>
             {venue !== 'undefined' ?

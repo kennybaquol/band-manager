@@ -16,6 +16,13 @@ export default function VenuesDetail() {
         })()
     }, [])    
 
+    // For testing*
+    useEffect(() => {
+        (async () => {
+            console.log(venue)
+        })()
+    }, [venue])  
+
     return (
         <div>
             {venue !== 'undefined' ?

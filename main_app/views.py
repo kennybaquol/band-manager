@@ -167,6 +167,13 @@ class CreateVenue(APIView):
       selectedStatus = serializer.data.get('status')
       band = Band.objects.get(id=id)
 
+      print('email passed through was:')
+      print(email)
+      print('phone passed through was:')
+      print(phone)      
+      print('note passed through was:')
+      print(note)
+
       # user = User.objects.first()
       # print(user)
 
