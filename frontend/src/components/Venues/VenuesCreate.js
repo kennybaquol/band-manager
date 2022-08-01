@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 export default function VenuesCreate() {
     const [venue, setVenue] = useState([])
@@ -44,6 +44,8 @@ export default function VenuesCreate() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const csrftoken = await getCookie('csrftoken');
+        console.log('attempting to pass through:')
+        console.log(venue)
 
         const requestOptions = {
             method: "POST",
@@ -51,9 +53,9 @@ export default function VenuesCreate() {
                 "Content-Type": "application/json",
                 "X-CSRFToken": csrftoken
             },
-            body: JSON.stringify(name),
+            body: JSON.stringify(venue),
         };
-        fetch("/main_app/create-band", requestOptions)
+        fetch(`/main_app/bands/${band_id}/venues/create-venue/`, requestOptions)
             .then((res) => res.json())
             .then((data) => {
                 // this.props.history.push("/room/" + data.code)
@@ -64,15 +66,9 @@ export default function VenuesCreate() {
     useEffect(() => {
         (async () => {
             setSelectedOption(options[0].value)
+            // setVenue({...venue, ['band_id']: band_id})
         })()
     }, [])
-
-    useEffect(() => {
-        (async () => {
-            console.log(venue)
-            console.log(selectedOption)
-        })()
-    }, [venue])
 
     return (
         <div>
@@ -81,6 +77,7 @@ export default function VenuesCreate() {
                 <div class="card">
                     <div class="card-content">
                         <form onSubmit={handleSubmit}>
+                            Name: <input onChange={handleChange} type="text" name="name" />
                             State: <input onChange={handleChange} type="text" name="state" />
                             City: <input onChange={handleChange} type="text" name="city" />
                             Email: <input onChange={handleChange} type="text" name="email" />

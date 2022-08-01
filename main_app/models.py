@@ -33,11 +33,15 @@ class Venue(models.Model):
     email = models.CharField(max_length=150, blank=True)
     phone = models.CharField(max_length=30, blank=True)
     note = models.CharField(max_length=150, blank=True)
-    status = models.CharField(max_length=30, choices=STATUSES, default=STATUSES[0][0])
+    # status = models.CharField(max_length=30, choices=STATUSES, default=STATUSES[0][0])
+    status = models.CharField(max_length=150)
     band = models.ForeignKey(Band, on_delete=models.CASCADE)
 
+    # def __str__(self):
+    #     return f"{self.get_status_display()} on {self.name}"
+
     def __str__(self):
-        return f"{self.get_status_display()} on {self.name}"
+        return self.name
 
     class Meta:
         ordering = ['-status']

@@ -144,6 +144,49 @@ class GetVenue(APIView):
     
     return Response({'Bad Request': ''}, status=status.HTTP_400_BAD_REQUEST)
 
+class CreateVenue(APIView):
+  serializer_class = CreateVenueSerializer
+  
+  def post(self, request, *args, **kwargs):
+    print('Running CreateVenue API view')
+
+    id = kwargs['band_id']
+    print(id)
+    
+    serializer = self.serializer_class(data=request.data)
+    print(serializer)
+    print('Checking if the serializer is valid')
+    if serializer.is_valid():
+      name = serializer.data.get('name')
+      state = serializer.data.get('state')
+      city = serializer.data.get('city')
+      email = serializer.data.get('name')
+      phone = serializer.data.get('name')
+      note = serializer.data.get('name')
+      status = serializer.data.get('name')
+      band = Band.objects.get(id=id)
+
+      user = User.objects.first()
+      print(user)
+
+      queryset = Venue.objects.filter(name=name)
+      print('Checking if the queryset exists')
+      print(queryset)
+      if queryset.exists():
+        print('Exists')
+        venue = queryset[0]
+        # band.name = name
+        # band.user = user
+        venue.save(update_fields='__all__')
+      else:
+        print('Does not exist')
+        venue = Venue(name=name, state=state, city=city, email=email, phone=phone, note=note, status=status, band=band)
+        print(venue)
+        venue.save()
+      
+      return Response(VenueSerializer(venue).data, status=status.HTTP_201_CREATED)
+
+    return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 

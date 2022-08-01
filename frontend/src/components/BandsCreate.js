@@ -18,7 +18,6 @@ export default function BandsDetail() {
         }
     }
     return cookieValue;
-
     }
 
     const handleChange = async (e) => {

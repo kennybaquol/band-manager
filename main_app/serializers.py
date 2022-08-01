@@ -15,3 +15,8 @@ class VenueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Venue
         fields = '__all__'
+
+class CreateVenueSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Venue
+        fields = ['name', 'state', 'city', 'email', 'phone', 'note', 'status']
