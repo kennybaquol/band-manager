@@ -5,9 +5,13 @@ import { Link, useParams } from 'react-router-dom'
 export default function VenuesCreate() {
     const [venue, setVenue] = useState([])
     const { band_id } = useParams()
+    const [selectedOption, setSelectedOption] = useState({})
     const options = [
         { value: 'Not Contacted', label: 'Not Contacted' },
-        { value: 'Contacted', label: 'Contacted' }
+        { value: 'Contacted', label: 'Contacted' },
+        { value: 'Followed Up With', label: 'Followed Up With' },
+        { value: 'Successfully Booked', label: 'Successfully Booked' },
+        { value: 'Not Going To Work', label: 'Not Going To Work' },
     ]
 
     // SOURCE: https://www.techiediaries.com/django-react-forms-csrf-axios/
@@ -29,6 +33,11 @@ export default function VenuesCreate() {
 
     const handleChange = async (e) => {
         setVenue({ ...venue, [e.target.name]: e.target.value })
+    }
+
+    const handleSelect = async (e) => {
+        setSelectedOption(e.value)
+        setVenue({...venue, ['status']: e.value})
     }
 
     // Upon submit, attempt to create a new Venue using a POST route
@@ -54,7 +63,14 @@ export default function VenuesCreate() {
 
     useEffect(() => {
         (async () => {
+            setSelectedOption(options[0].value)
+        })()
+    }, [])
+
+    useEffect(() => {
+        (async () => {
             console.log(venue)
+            console.log(selectedOption)
         })()
     }, [venue])
 
@@ -72,8 +88,8 @@ export default function VenuesCreate() {
                             Note: <input onChange={handleChange} type="text" name="note" />
                             Status:
                             <Select
-                                onChange={handleChange}
-                                value={venue.status}
+                                value={options.find(obj => obj.value === selectedOption)}
+                                onChange={handleSelect}
                                 options={options}
                             >
                             </Select>
