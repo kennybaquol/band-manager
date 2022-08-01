@@ -167,19 +167,22 @@ class CreateVenue(APIView):
       selectedStatus = serializer.data.get('status')
       band = Band.objects.get(id=id)
 
-      user = User.objects.first()
-      print(user)
+      # user = User.objects.first()
+      # print(user)
 
       queryset = Venue.objects.filter(name=name)
       print('Checking if the queryset exists')
       print(queryset)
       if queryset.exists():
         print('Exists')
-        # venue = queryset[0]
-        # band.name = name
-        # band.user = user
-        # venue.save(update_fields='__all__')
-        print(queryset[0])
+        venue = queryset[0]
+        venue.state = state
+        venue.city = city
+        venue.email = email
+        venue.phone = phone
+        venue.note = note
+        venue.status = selectedStatus
+        venue.save(update_fields=['state', 'city', 'email', 'phone', 'note', 'status'])
       else:
         print('Does not exist')
         venue = Venue(name=name, state=state, city=city, email=email, phone=phone, note=note, status=selectedStatus, band=band)

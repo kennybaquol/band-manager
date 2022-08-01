@@ -71,8 +71,6 @@ export default function VenuesUpdate() {
                 .then((data) => {
                     setVenue(data)
                     // setSelectedOption(venue.status)
-                    console.log(data)
-                    console.log(venue)
                 })
         })()
     }, [])
@@ -100,7 +98,7 @@ export default function VenuesUpdate() {
                                     >
                                     </Select>
                                     <br />
-                                    <input type="submit" class="btn" value="Add Venue" />
+                                    <input type="submit" class="btn" value="Submit Changes" />
                                 </form>
                             </div>
                         </div>
