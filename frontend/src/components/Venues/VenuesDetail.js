@@ -1,31 +1,51 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 
 export default function VenuesDetail() {
     const [venue, setVenue] = useState([])
     const [deletePressed, setDeletePressed] = useState(false)
     const { band_id, venue_id } = useParams()
+    const history = useHistory()
+
+    // SOURCE: https://www.techiediaries.com/django-react-forms-csrf-axios/
+    // Get the csrf token to use when using the POST method
+    const getCookie = async (name) => {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            let cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 
     // Upon submit, attempt to create a new Venue using a POST route
     const handleDelete = async (e) => {
         e.preventDefault()
         console.log('delete button pressed AND confirmed')
 
-        // const csrftoken = await getCookie('csrftoken');
-        // const requestOptions = {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         "X-CSRFToken": csrftoken
-        //     },
-        //     body: JSON.stringify(venue),
-        // };
-        // fetch(`/main_app/bands/${band_id}/venues/create-venue/`, requestOptions)
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //         // this.props.history.push("/room/" + data.code)
-        //         console.log(data)
-        //     })
+        const csrftoken = await getCookie('csrftoken');
+        const requestOptions = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrftoken
+            },
+            body: JSON.stringify(venue),
+        };
+        fetch(`/main_app/bands/${band_id}/venues/${venue_id}/delete`, requestOptions)
+            .then((res) => {
+                res.json()
+                history.push(`/bands`)
+            })
+            .then(() => {
+                history.push(`/bands`)
+            })
     }
 
     // Upon submit, attempt to create a new Venue using a POST route
@@ -33,22 +53,6 @@ export default function VenuesDetail() {
         e.preventDefault()
         console.log('delete button pressed')
         setDeletePressed(true)
-
-        // const csrftoken = await getCookie('csrftoken');
-        // const requestOptions = {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         "X-CSRFToken": csrftoken
-        //     },
-        //     body: JSON.stringify(venue),
-        // };
-        // fetch(`/main_app/bands/${band_id}/venues/create-venue/`, requestOptions)
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //         // this.props.history.push("/room/" + data.code)
-        //         console.log(data)
-        //     })
     }
 
     // Upon first load, get the details of the current venue

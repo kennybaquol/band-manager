@@ -199,8 +199,24 @@ class CreateVenue(APIView):
 
     return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
+class DeleteVenue(APIView):
+  serializer_class = VenueSerializer
 
+  def delete(self, request, *args, **kwargs):
+    print('Running GetVenue API View')
 
+    band_id = kwargs['band_id']
+    venue_id = kwargs['venue_id']
+    venue = Venue.objects.get(id=venue_id)
+
+    print(venue)
+    if venue:
+      venue.delete()
+      # data['user'] = self.request.session.session_key == band[0].user
+      return Response(data, status=status.HTTP_200_OK)
+    # return Response({'Bad Request': 'Invalid Band Id'}, status=status.HTTP_404_NOT_FOUND)
+    
+    return Response({'Bad Request': ''}, status=status.HTTP_400_BAD_REQUEST)
 
 
 
