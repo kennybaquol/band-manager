@@ -19,4 +19,4 @@ class VenueSerializer(serializers.ModelSerializer):
 class CreateVenueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Venue
-        fields = ['name', 'state', 'city', 'email', 'phone', 'note', 'status']
+        fields = ['name', 'state', 'city', 'status']

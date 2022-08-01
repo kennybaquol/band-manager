@@ -157,13 +157,14 @@ class CreateVenue(APIView):
     print(serializer)
     print('Checking if the serializer is valid')
     if serializer.is_valid():
-      name = serializer.data.get('name')
+
+      name = serializer.data.get('name')        
       state = serializer.data.get('state')
       city = serializer.data.get('city')
-      email = serializer.data.get('name')
-      phone = serializer.data.get('name')
-      note = serializer.data.get('name')
-      status = serializer.data.get('name')
+      email = serializer.data.get('email')
+      phone = serializer.data.get('phone')
+      note = serializer.data.get('note')
+      selectedStatus = serializer.data.get('status')
       band = Band.objects.get(id=id)
 
       user = User.objects.first()
@@ -174,14 +175,14 @@ class CreateVenue(APIView):
       print(queryset)
       if queryset.exists():
         print('Exists')
-        venue = queryset[0]
+        # venue = queryset[0]
         # band.name = name
         # band.user = user
-        venue.save(update_fields='__all__')
+        # venue.save(update_fields='__all__')
+        print(queryset[0])
       else:
         print('Does not exist')
-        venue = Venue(name=name, state=state, city=city, email=email, phone=phone, note=note, status=status, band=band)
-        print(venue)
+        venue = Venue(name=name, state=state, city=city, email=email, phone=phone, note=note, status=selectedStatus, band=band)
         venue.save()
       
       return Response(VenueSerializer(venue).data, status=status.HTTP_201_CREATED)
