@@ -52,8 +52,10 @@ export default function Login() {
             <h1>Log In</h1>
 
             <form onSubmit={loginUser}>
+                Username: <input type="text" name="username" />
+                Password: <input type="text" name="password" />
                 <input type="submit" class="btn" value="login" />
-                <input type="hidden" name="next" value="{{ next }}" />
+                {/* <input type="hidden" name="next" value="{{ next }}" /> */}
             </form>
         </>
     )

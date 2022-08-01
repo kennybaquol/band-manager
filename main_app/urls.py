@@ -4,16 +4,25 @@ from .views import *
 # from rest_framework.routers import DefaultRouter
 from . import views
 
+from rest_framework_simplejwt.views import(
+    TokenObtainPairView,
+    TokenRefreshView
+)
+
 # router = DefaultRouter()
 # router.register(r'bands', views.BandViewSet, basename='band')
 # urlpatterns = router.urls
 
 urlpatterns = [
     # path('', include(urlpatterns)),
-    path('', views.home, name='home'),
-    path('bands', BandView.as_view()),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', views.signup, name='signup'),
+
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('', views.home, name='home'),
+    path('bands/', BandView.as_view()),
     path('about/', views.about, name='about'),
     path('get-all-bands/', GetAllBands.as_view()),
     path('bands/', views.bands_index, name='bands_index'),

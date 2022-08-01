@@ -14,18 +14,19 @@ export const AuthProvider = ({ children }) => {
     let loginUser = async (e) => {
         e.preventDefault()
         console.log("Testing loginUser from AuthContext!")
-        // await fetch("/token/", {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({ 'username': null, 'password': null })
-        // })
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //         console.log(data)
-        //     })
-        return 'K Moniessss'
+        console.log(e.target)
+        await fetch("http://127.0.0.1:8000/main_app/token/", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 'username': e.target.username.value, 'password': e.target.username.value })
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data)
+            })
+        // return 'K Moniessss'
     }
 
     const contextData = {
