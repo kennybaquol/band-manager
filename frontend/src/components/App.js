@@ -19,6 +19,7 @@ import Login from "./Registration/login"
 import VenuesIndex from "./Venues/VenuesIndex"
 import VenuesDetail from "./Venues/VenuesDetail"
 import VenuesCreate from "./Venues/VenuesCreate"
+import VenuesUpdate from "./Venues/VenuesUpdate"
 
 export default function App() {
     // let { user } = useContext(AuthContext)
@@ -56,6 +57,7 @@ export default function App() {
                         <Route exact path="/bands/create" component={BandForm} />
                         <Route exact path="/bands/:id" component={BandsDetail} />
                         <Route exact path="/bands/:band_id/venues/create" component={VenuesCreate} />
+                        <Route exact path="/bands/:band_id/venues/:venue_id/edit" component={VenuesUpdate} />
                         <Route exact path="/bands/:band_id/venues/:venue_id" component={VenuesDetail} />
                         <Route exact path="/bands/:id/venues" component={VenuesIndex} />
                     </Switch>
