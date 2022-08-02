@@ -14,7 +14,8 @@ import {
     Switch,
 } from "react-router-dom"
 
-import Login from "./Registration/login"
+import Login from "./Registration/Login"
+import Signup from "./Registration/Signup"
 import VenuesIndex from "./Venues/VenuesIndex"
 import VenuesDetail from "./Venues/VenuesDetail"
 import VenuesCreate from "./Venues/VenuesCreate"
@@ -31,13 +32,14 @@ export default function App() {
                     <Switch>
                         <Route exact path="/" component={Home} />
                         <Route exact path="/login" component={Login} />
+                        <Route exact path="/signup" component={Signup} />
                         <PrivateRoute exact path="/bands" component={BandsIndex} />
-                        <Route exact path="/bands/create" component={BandForm} />
-                        <Route exact path="/bands/:id" component={BandsDetail} />
-                        <Route exact path="/bands/:band_id/venues/create" component={VenuesCreate} />
-                        <Route exact path="/bands/:band_id/venues/:venue_id/edit" component={VenuesUpdate} />
-                        <Route exact path="/bands/:band_id/venues/:venue_id" component={VenuesDetail} />
-                        <Route exact path="/bands/:id/venues" component={VenuesIndex} />
+                        <PrivateRoute exact path="/bands/create" component={BandForm} />
+                        <PrivateRoute exact path="/bands/:id" component={BandsDetail} />
+                        <PrivateRoute exact path="/bands/:band_id/venues/create" component={VenuesCreate} />
+                        <PrivateRoute exact path="/bands/:band_id/venues/:venue_id/edit" component={VenuesUpdate} />
+                        <PrivateRoute exact path="/bands/:band_id/venues/:venue_id" component={VenuesDetail} />
+                        <PrivateRoute exact path="/bands/:id/venues" component={VenuesIndex} />
                     </Switch>
                 </AuthProvider>
             </Router>

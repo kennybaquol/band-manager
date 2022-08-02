@@ -61,10 +61,18 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    let logoutUser = () => {
+        setAuthTokens(null)
+        setUser(null)
+        localStorage.removeItem('authTokens')
+        history.push('/login')
+    }
+
     const contextData = {
         user: user,
         authTokens: authTokens,
-        loginUser: loginUser
+        loginUser: loginUser,
+        logoutUser: logoutUser
     }
 
     useEffect(() => {
