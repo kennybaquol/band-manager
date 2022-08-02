@@ -11,6 +11,7 @@ import BandForm from "./BandsCreate"
 import {
     BrowserRouter as Router,
     Route,
+    Switch,
 } from "react-router-dom"
 
 import Login from "./Registration/login"
@@ -26,7 +27,8 @@ export default function App() {
         <div>
             <Router>
                 <AuthProvider>
-                        <NavBar />
+                    <NavBar />
+                    <Switch>
                         <Route exact path="/" component={Home} />
                         <Route exact path="/login" component={Login} />
                         <PrivateRoute exact path="/bands" component={BandsIndex} />
@@ -36,6 +38,7 @@ export default function App() {
                         <Route exact path="/bands/:band_id/venues/:venue_id/edit" component={VenuesUpdate} />
                         <Route exact path="/bands/:band_id/venues/:venue_id" component={VenuesDetail} />
                         <Route exact path="/bands/:id/venues" component={VenuesIndex} />
+                    </Switch>
                 </AuthProvider>
             </Router>
 
