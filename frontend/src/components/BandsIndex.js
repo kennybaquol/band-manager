@@ -33,24 +33,26 @@ export default function BandsIndex() {
 
     useEffect(() => {
         (async () => {
-            
             console.log('user id is: ')
             console.log(userId)
             const csrftoken = await getCookie('csrftoken')
             const requestOptions = {
                 method: "POST",
-                headers: { 
+                headers: {
                     "Content-Type": "application/json",
                     "X-CSRFToken": csrftoken,
-                    
+
                 },
                 body: JSON.stringify(userId),
             }
-            fetch('/main_app/get-all-bands/', requestOptions)
-                .then(res => res.json())
-                .then((data) => {
-                    setBands(data)
-                })
+            if (userId > 0) {
+                fetch('/main_app/get-all-bands/', requestOptions)
+                    .then(res => res.json())
+                    .then((data) => {
+                        setBands(data)
+                    })
+            }
+
         })()
     }, [userId])
 
