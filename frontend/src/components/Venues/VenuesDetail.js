@@ -74,7 +74,7 @@ export default function VenuesDetail() {
     }, [venue])
 
     return (
-        <div>
+        <div class="center-align">
             {venue !== 'undefined' ?
                 <>
                     <h1>{venue.name}</h1>

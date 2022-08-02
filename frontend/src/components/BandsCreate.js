@@ -12,17 +12,17 @@ export default function BandsDetail() {
     // Get the csrf token to use when using the POST method
     const getCookie = async (name) => {
         let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        let cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            let cookie = jQuery.trim(cookies[i]);
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+        if (document.cookie && document.cookie !== '') {
+            let cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
             }
         }
-    }
-    return cookieValue;
+        return cookieValue;
     }
 
     const handleChange = async (e) => {
@@ -42,10 +42,10 @@ export default function BandsDetail() {
 
         const requestOptions = {
             method: "POST",
-            headers: { 
+            headers: {
                 "Content-Type": "application/json",
                 "X-CSRFToken": csrftoken,
-                
+
             },
             body: JSON.stringify(info),
         };
@@ -68,18 +68,18 @@ export default function BandsDetail() {
             const id = user.user_id
             const requestOptions = {
                 method: "POST",
-                headers: { 
+                headers: {
                     "Content-Type": "application/json",
                     "X-CSRFToken": csrftoken,
                 },
                 body: JSON.stringify(id),
             };
             fetch('/main_app/get-user/', requestOptions)
-            .then(res => res.json())
-            .then((data) => {
-                console.log(data)
-                setUsername(data.username)
-            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data)
+                    setUsername(data.username)
+                })
         })()
     }, [])
 
@@ -91,15 +91,16 @@ export default function BandsDetail() {
     // }, [username])
 
     return (
-        <div>
+        <div class="center-align">
             <h1>Add A Band</h1>
 
             {/* <!-- Leaving the action empty makes the form post to the same url used to display it --> */}
-            <form onSubmit={handleSubmit}>
-                Name: <input type="text" onChange={handleChange} name="name"/>
+            <form class="addPrompt" onSubmit={handleSubmit}>
+                Name: <input type="text" onChange={handleChange} name="name" />
+                <br /><br />
                 <input type="submit" value="Add Band!" class="btn" />
+                <br /><br />
             </form>
-            <br /><br />
 
         </div>
     )

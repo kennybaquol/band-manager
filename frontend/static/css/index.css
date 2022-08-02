@@ -5,9 +5,16 @@ footer {
 .card {
     margin: 2% 15%;
     background-color: whitesmoke;
+    text-align: center;
 }
 
 a {
     text-decoration: none;
     color: inherit;
+}
+
+.addPrompt {
+    margin: 2% 15%;
+    background-color: whitesmoke;
+    text-align: center;
 }

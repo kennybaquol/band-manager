@@ -84,7 +84,7 @@ export default function VenuesUpdate() {
     }, [venue])
 
     return (
-        <div>
+        <div class="center-align">
             {venue !== 'undefined' ?
                 <>
                     <h3>Edit <span class="teal-text">{venue.name}</span></h3>

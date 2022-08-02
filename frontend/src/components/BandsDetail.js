@@ -19,11 +19,11 @@ export default function BandsDetail() {
     }, [])
 
     return (
-        <div>
+        <div class="center-align">
             {/* {% if band.user.username == user.username %} */}
             <h1>{ band.name }</h1>
-            <div class="row">
-                <h4><Link to={`${id}/venues`}>Venues</Link></h4>
+            <div>
+                <h3 class="blue-text"><Link to={`${id}/venues`}>Venues</Link></h3>
                 
             </div>
         </div>

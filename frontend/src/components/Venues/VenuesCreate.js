@@ -72,7 +72,7 @@ export default function VenuesCreate() {
     }, [])
 
     return (
-        <div>
+        <div class="center-align">
             <h3>Add A Venue</h3>
             <div class="row">
                 <div class="card">

@@ -30,7 +30,7 @@ export default function VenuesIndex() {
     // For every band that belongs to the user, 
     // list a card that links to each band's detail page
     return (
-        <div>
+        <div class="center-align">
             <h2>Venues</h2>
             <div class="row">
                 <Link to={`/bands/${id}/venues/create`}>
