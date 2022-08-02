@@ -8,8 +8,10 @@ const AuthContext = createContext(null)
 export default AuthContext
 
 export const AuthProvider = ({ children }) => {
-    const [authTokens, setAuthTokens] = useState(null)
-    const [user, setUser] = useState(null)
+    let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
+    let [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
+    let [loading, setLoading] = useState(true)
+    const history = useHistory()
 
     // SOURCE: https://www.techiediaries.com/django-react-forms-csrf-axios/
     // Get the csrf token to use when using the POST method
@@ -47,9 +49,13 @@ export const AuthProvider = ({ children }) => {
         //     console.log(data)
         // })
         let data = await response.json()
+        console.log('here is data:')
+        console.log(data)
         if (response.status === 200) {
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
+            localStorage.setItem('authTokens', JSON.stringify(data))
+            // history.push('/')
         } else {
             alert('something went wrong!')
         }
@@ -57,17 +63,19 @@ export const AuthProvider = ({ children }) => {
 
     const contextData = {
         user: user,
+        authTokens: authTokens,
         loginUser: loginUser
     }
 
     useEffect(() => {
         (async () => {
+            console.log('user has changed')
             console.log(user)
         })()
     }, [user])
 
     return (
-        <AuthContext.Provider value={"Kenny"}>
+        <AuthContext.Provider value={contextData}>
             {children}
         </AuthContext.Provider>
     )

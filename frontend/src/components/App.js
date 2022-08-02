@@ -29,7 +29,7 @@ export default function App() {
                         <NavBar />
                         <Route exact path="/" component={Home} />
                         <Route exact path="/login" component={Login} />
-                        <Route exact path="/bands" component={BandsIndex} />
+                        <PrivateRoute exact path="/bands" component={BandsIndex} />
                         <Route exact path="/bands/create" component={BandForm} />
                         <Route exact path="/bands/:id" component={BandsDetail} />
                         <Route exact path="/bands/:band_id/venues/create" component={VenuesCreate} />
