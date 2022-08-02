@@ -14,22 +14,16 @@ from rest_framework.response import Response
 
 from operator import length_hint
 
-# class BandViewSet(viewsets.ModelViewSet):
-#   serializer_class = BandSerializer
-#   queryset = Band.objects.all()
-
 class BandView(generics.ListAPIView):
   queryset = Band.objects.all()
   serializer_class = BandSerializer
 
 class GetUser(APIView):
   serializer_class = UserSerializer
-  # lookup_url_kwarg = 'id'
 
   print('running GetUser api view')
 
   def post(self, request, format=None):
-    # id = request.GET.get(self.lookup_url_kwarg)
     print('request data: ')
     print(request.data)
     id = request.data
@@ -38,18 +32,6 @@ class GetUser(APIView):
     print(user)
     if user:
       return Response(UserSerializer(user).data, status.HTTP_200_OK)
-    # print(id)
-    # if id != None:
-    #   band = Band.objects.get(id=id)
-    #   # band = Band.objects.get(name="Confined")
-    #   print(band)
-    #   # if len(band) > 0:
-    #   if band:
-    #     data = BandSerializer(band).data
-    #     print(data)
-    #     # data['user'] = self.request.session.session_key == band[0].user
-    #     return Response(data, status=status.HTTP_200_OK)
-    #   return Response({'Bad Request': 'Invalid Band Id'}, status=status.HTTP_404_NOT_FOUND)
     
     return Response({'Bad Request': 'Band paramter not found in request'}, status=status.HTTP_400_BAD_REQUEST)  
 
@@ -62,13 +44,10 @@ class GetBand(APIView):
     print(id)
     if id != None:
       band = Band.objects.get(id=id)
-      # band = Band.objects.get(name="Confined")
       print(band)
-      # if len(band) > 0:
       if band:
         data = BandSerializer(band).data
         print(data)
-        # data['user'] = self.request.session.session_key == band[0].user
         return Response(data, status=status.HTTP_200_OK)
       return Response({'Bad Request': 'Invalid Band Id'}, status=status.HTTP_404_NOT_FOUND)
     
@@ -79,16 +58,9 @@ class GetAllBands(APIView):
 
   def post(self, request, format=None):
     print('running getallbands api view')
-
-    # bands = []
-    # for band in Band.objects.filter():
-    #   bands.append(band)
     print("request data")
     print(request.data)
-
     user_id = request.data
-    # user = User.objects.get(username=username)
-    # id = user_id
     print("User ID:")
     print(user_id)
 
@@ -100,9 +72,7 @@ class GetAllBands(APIView):
       for band in bands.iterator():
         currentBandData = BandSerializer(band).data
         data.append(currentBandData)
-      # data['user'] = self.request.session.session_key == band[0].user
       return Response(data, status=status.HTTP_200_OK)
-    # return Response({'Bad Request': 'Invalid Band Id'}, status=status.HTTP_404_NOT_FOUND)
     
     return Response({'Bad Request': ''}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -157,9 +127,7 @@ class GetVenues(APIView):
       for idx, venue in enumerate(venues):
         currentVenueData = VenueSerializer(venues[idx]).data
         data.append(currentVenueData)
-      # data['user'] = self.request.session.session_key == band[0].user
       return Response(data, status=status.HTTP_200_OK)
-    # return Response({'Bad Request': 'Invalid Band Id'}, status=status.HTTP_404_NOT_FOUND)
     
     return Response({'Bad Request': ''}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -176,9 +144,7 @@ class GetVenue(APIView):
     print(venue)
     if venue:
       data = VenueSerializer(venue).data
-      # data['user'] = self.request.session.session_key == band[0].user
       return Response(data, status=status.HTTP_200_OK)
-    # return Response({'Bad Request': 'Invalid Band Id'}, status=status.HTTP_404_NOT_FOUND)
     
     return Response({'Bad Request': ''}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -211,9 +177,6 @@ class CreateVenue(APIView):
       print(phone)      
       print('note passed through was:')
       print(note)
-
-      # user = User.objects.first()
-      # print(user)
 
       queryset = Venue.objects.filter(name=name)
       print('Checking if the queryset exists')

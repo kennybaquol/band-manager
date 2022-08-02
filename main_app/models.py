@@ -33,47 +33,11 @@ class Venue(models.Model):
     email = models.CharField(max_length=150, blank=True, null=True)
     phone = models.CharField(max_length=30, blank=True, null=True)
     note = models.CharField(max_length=150, blank=True, null=True)
-    # status = models.CharField(max_length=30, choices=STATUSES, default=STATUSES[0][0])
     status = models.CharField(max_length=150)
     band = models.ForeignKey(Band, on_delete=models.CASCADE)
-
-    # def __str__(self):
-    #     return f"{self.get_status_display()} on {self.name}"
 
     def __str__(self):
         return self.name
 
     class Meta:
         ordering = ['-status']
-
-# class User(models.Model):
-#     username=models.CharField(max_length=255, unique=True, db_index=True)
-#     password=models.CharField(max_length=255, unique=True, db_index=True)
-
-#     def __str__(self):
-#         return self.username
-
-# class UserManager(BaseUserManager):
-
-#     def create_user(self, username, password=None):
-#         if username is None:
-#             raise TypeError('Users should have a username')
-
-#         user=self.model(username=username)
-#         user.set_password(password)
-#         user.save()
-#         return user
-
-#     def create_superuser(self, username, password=None):
-#         if password is None:
-#             raise TypeError('Users should have a password')
-
-#         user=self.create_user(username, password)
-#         user.is_superuser = True
-#         user.is_staff = True
-#         user.save()
-#         return user
-
-# class User(AbstractBaseUser, PermissionsMixin):
-#     username=models.CharField(max_length=255, unique=True, db_index=True)
-#     username=models.CharField(max_length=255, unique=True, db_index=True)
