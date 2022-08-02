@@ -5,6 +5,14 @@ export default function BandsDetail() {
     const [band, setBand] = useState({ name: 'Lel', user: 'Bo Bell' })
     // const { id } = useParams()
 
+    // *THIS PAGE IS STILL UNDER CONSTRUCTION*
+
+
+
+
+
+
+
     useEffect(() => {
         (async () => {
             console.log('Running BandForm useEffect!')

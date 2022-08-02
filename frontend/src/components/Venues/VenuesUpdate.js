@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 export default function VenuesUpdate() {
     const [venue, setVenue] = useState([])
     const { band_id, venue_id } = useParams()
+    const history = useHistory()
     const [selectedOption, setSelectedOption] = useState({})
     const options = [
         { value: 'Not Contacted', label: 'Not Contacted' },
@@ -58,8 +59,8 @@ export default function VenuesUpdate() {
         fetch(`/main_app/bands/${band_id}/venues/create-venue/`, requestOptions)
             .then((res) => res.json())
             .then((data) => {
-                // this.props.history.push("/room/" + data.code)
                 console.log(data)
+                history.push(`/bands/${band_id}/venues/${venue_id}`)
             })
     }
 
@@ -70,7 +71,6 @@ export default function VenuesUpdate() {
                 .then(res => res.json())
                 .then((data) => {
                     setVenue(data)
-                    // setSelectedOption(venue.status)
                 })
         })()
     }, [])

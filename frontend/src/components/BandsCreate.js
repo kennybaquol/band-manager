@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 
 export default function BandsDetail() {
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     let { user } = useContext(AuthContext)
+    let history = useHistory()
 
     // SOURCE: https://www.techiediaries.com/django-react-forms-csrf-axios/
     // Get the csrf token to use when using the POST method
@@ -48,9 +50,11 @@ export default function BandsDetail() {
             body: JSON.stringify(info),
         };
         fetch("/main_app/create-band", requestOptions)
-            .then((res) => res.json())
+            .then((res) => {
+                res.json()
+            })
             .then((data) => {
-                // this.props.history.push("/room/" + data.code)
+                history.push(`/bands`)
                 console.log(data)
             })
     }
