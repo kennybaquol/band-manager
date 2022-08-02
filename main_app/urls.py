@@ -16,6 +16,8 @@ urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
+    path('get-user/', GetUser.as_view()),
+
     path('', views.home, name='home'),
     path('bands/', BandView.as_view()),
     path('about/', views.about, name='about'),

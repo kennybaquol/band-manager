@@ -6,6 +6,11 @@ class BandSerializer(serializers.ModelSerializer):
         model = Band
         fields = '__all__'
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
 class CreateBandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Band

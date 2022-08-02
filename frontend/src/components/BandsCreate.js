@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import AuthContext from '../context/AuthContext';
 
 export default function BandsDetail() {
     const [name, setName] = useState('')
+    const [username, setUsername] = useState('')
+    let { user } = useContext(AuthContext)
 
     // SOURCE: https://www.techiediaries.com/django-react-forms-csrf-axios/
     // Get the csrf token to use when using the POST method
@@ -28,14 +31,21 @@ export default function BandsDetail() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const csrftoken = await getCookie('csrftoken');
+        const info = {
+            name: name.name,
+            username
+        }
+        console.log('trying to pass INFO')
+        console.log(info)
 
         const requestOptions = {
             method: "POST",
             headers: { 
                 "Content-Type": "application/json",
-                "X-CSRFToken": csrftoken
+                "X-CSRFToken": csrftoken,
+                
             },
-            body: JSON.stringify(name),
+            body: JSON.stringify(info),
         };
         fetch("/main_app/create-band", requestOptions)
             .then((res) => res.json())
@@ -44,6 +54,37 @@ export default function BandsDetail() {
                 console.log(data)
             })
     }
+
+    useEffect(() => {
+        (async () => {
+            // setUsername(user.user_id)
+            // e.preventDefault()
+            const csrftoken = await getCookie('csrftoken');
+
+            const id = user.user_id
+            const requestOptions = {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify(id),
+            };
+            fetch('/main_app/get-user/', requestOptions)
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data)
+                setUsername(data.username)
+            })
+        })()
+    }, [])
+
+    // useEffect(() => {
+    //     (async () => {
+    //         console.log('username has been changed to:')
+    //         console.log(username)
+    //     })()
+    // }, [username])
 
     return (
         <div>

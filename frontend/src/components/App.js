@@ -32,7 +32,7 @@ export default function App() {
                     <Switch>
                         <Route exact path="/" component={Home} />
                         <Route exact path="/login" component={Login} />
-                        <Route exact path="/signup" component={Signup} />
+                        <Route exact path="/main_app/accounts/signup" component={Signup} />
                         <PrivateRoute exact path="/bands" component={BandsIndex} />
                         <PrivateRoute exact path="/bands/create" component={BandForm} />
                         <PrivateRoute exact path="/bands/:id" component={BandsDetail} />
