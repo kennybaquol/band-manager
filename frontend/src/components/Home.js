@@ -7,7 +7,7 @@ export default function Home() {
     <div>
       {user ?
         <>
-          <h1>Welcome, {user.username}</h1>
+          <h1>Welcome!</h1>
         </>
         :
         <>

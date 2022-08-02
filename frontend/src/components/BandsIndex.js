@@ -4,26 +4,69 @@ import AuthContext from '../context/AuthContext'
 
 export default function BandsIndex() {
     const [bands, setBands] = useState([])
+    const [userId, setUserId] = useState('')
+    let { user } = useContext(AuthContext)
 
-    // let user = 'Shorty'
-    // let user = useContext(AuthContext)
+    // SOURCE: https://www.techiediaries.com/django-react-forms-csrf-axios/
+    // Get the csrf token to use when using the POST method
+    const getCookie = async (name) => {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            let cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 
     // Upon first load, get all of the user's bands
+    // useEffect(() => {
+    //     (async () => {
+    //         // const csrftoken = await getCookie('csrftoken')
+    //         // const id = user.user_id
+    //         // const requestOptions = {
+    //         //     method: "POST",
+    //         //     headers: { 
+    //         //         "Content-Type": "application/json",
+    //         //         "X-CSRFToken": csrftoken,
+    //         //     },
+    //         //     body: JSON.stringify(id),
+    //         // };
+    //         // fetch('/main_app/get-user/', requestOptions)
+    //         // .then(res => res.json())
+    //         // .then((data) => {
+    //         //     console.log(data)
+    //         //     setUsername(data.username)
+    //         // })
+
+    //     })()
+    // }, [])
+
     useEffect(() => {
         (async () => {
-            fetch('/main_app/get-all-bands')
+            setUserId(user.user_id)
+            const csrftoken = await getCookie('csrftoken')
+            const requestOptions = {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                    
+                },
+                body: JSON.stringify(userId),
+            }
+            fetch('/main_app/get-all-bands/', requestOptions)
                 .then(res => res.json())
                 .then((data) => {
                     setBands(data)
                 })
         })()
     }, [])
-
-    // useEffect(() => {
-    //     (async () => {
-    //         console.log(user)
-    //     })()
-    // }, [user])
 
     // For every band that belongs to the user, 
     // list a card that links to each band's detail page

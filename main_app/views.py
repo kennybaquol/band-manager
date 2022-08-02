@@ -77,19 +77,24 @@ class GetBand(APIView):
 class GetAllBands(APIView):
   serializer_class = BandSerializer
 
-  def get(self, request, format=None):
+  def post(self, request, format=None):
+    print('running getallbands api view')
 
     # bands = []
     # for band in Band.objects.filter():
     #   bands.append(band)
 
-    bands = Band.objects.filter()
+    id = request.data
+    # user = User.objects.get(username=username)
+    print(id)
+
+    bands = Band.objects.filter(user=1)
 
     print(bands)
     if bands:
       data = []
-      for idx, band in enumerate(bands):
-        currentBandData = BandSerializer(bands[idx]).data
+      for band in bands.iterator():
+        currentBandData = BandSerializer(band).data
         data.append(currentBandData)
       # data['user'] = self.request.session.session_key == band[0].user
       return Response(data, status=status.HTTP_200_OK)
@@ -102,27 +107,17 @@ class CreateBandView(APIView):
   
   def post(self, request, format=None):
     print('Running CreateBandView')
-    # if not self.request.session.exists(self.request.session.session_key):
-    #   self.request.session.create()
     
     serializer = self.serializer_class(data=request.data)
-    # print(serializer)
     print('Checking if the serializer is valid')
     if serializer.is_valid():
       print('lel')
       name = serializer.data.get('name')
-      # user = self.request.session.session_key
-      # user = serializer.data.get('user')
-      # print(request)
-      # user = User.objects.first()
       print(request.data)
       dataSet = request.data
       username = dataSet['username']
-
-
       user = User.objects.get(username=username)
       print(user)
-
       queryset = Band.objects.filter(name=name)
       print('Checking if the queryset exists')
       print(queryset)
@@ -133,14 +128,9 @@ class CreateBandView(APIView):
           print(username)
           if band.user.username == username:
             return Response({'Bad Request': 'You already have a band with this name!'}, status=status.HTTP_400_BAD_REQUEST)
-        # band = queryset[0]
-        # band.name = name
-        # band.user = user
-        # band.save(update_fields='__all__')
-      else:
-        print('Does not exist')
-        band = Band(name=name, user=user)
-        band.save()
+      print('Does not exist')
+      band = Band(name=name, user=user)
+      band.save()
 
       return Response(BandSerializer(band).data, status=status.HTTP_201_CREATED)
 
