@@ -7,7 +7,7 @@ export default function NavBar() {
     return (
         <header class="navbar-fixed">
             <nav>
-                <div class="nav-wrapper">
+                <div class="nav-wrapper deep-purple darken-3">
                     <ul>
                         <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Band Manager</a></li>
                     </ul>

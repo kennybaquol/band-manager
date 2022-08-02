@@ -59,7 +59,7 @@ export default function BandsIndex() {
     // For every band that belongs to the user, 
     // list a card that links to each band's detail page
     return (
-        <div>
+        <div class="center-align">
             <h1>My Bands</h1>
             {bands.length > 0 ?
                 <>
@@ -68,8 +68,6 @@ export default function BandsIndex() {
                             <Link to={`/bands/${band.id}`}>
                                 <div class="card-content">
                                     <span class="card-title">{band.name}</span>
-                                    <p>Members: </p>
-                                    <p></p>
                                 </div>
                             </Link>
                         </div>

@@ -6,7 +6,7 @@ export default function Signup() {
     }
 
     return (
-        <div class="card-content">
+        <div class="card-content center-align">
             <br />
             <button class="btn" onClick={refreshPage}>Sign Up Today!</button>
             <br /><br />

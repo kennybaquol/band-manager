@@ -44,7 +44,7 @@ export default function App() {
                 </AuthProvider>
             </Router>
 
-            <footer class="page-footer">
+            <footer class="page-footer deep-purple darken-3 right-align">
                 <div>All Rights Reserved, &copy; 2022 Band Manager &nbsp;</div>
             </footer>
         </div>

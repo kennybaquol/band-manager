@@ -1,0 +1,13 @@
+footer {
+    margin-top: 3%;
+}
+
+.card {
+    margin: 2% 15%;
+    background-color: whitesmoke;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
