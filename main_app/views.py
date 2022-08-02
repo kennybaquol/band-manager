@@ -83,12 +83,13 @@ class GetAllBands(APIView):
     # bands = []
     # for band in Band.objects.filter():
     #   bands.append(band)
-
-    id = request.data
+    print(request.data)
+    user_id = request.data
     # user = User.objects.get(username=username)
+    id = user_id
     print(id)
 
-    bands = Band.objects.filter(user=1)
+    bands = Band.objects.filter(user=id)
 
     print(bands)
     if bands:

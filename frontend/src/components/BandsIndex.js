@@ -25,31 +25,17 @@ export default function BandsIndex() {
     }
 
     // Upon first load, get all of the user's bands
-    // useEffect(() => {
-    //     (async () => {
-    //         // const csrftoken = await getCookie('csrftoken')
-    //         // const id = user.user_id
-    //         // const requestOptions = {
-    //         //     method: "POST",
-    //         //     headers: { 
-    //         //         "Content-Type": "application/json",
-    //         //         "X-CSRFToken": csrftoken,
-    //         //     },
-    //         //     body: JSON.stringify(id),
-    //         // };
-    //         // fetch('/main_app/get-user/', requestOptions)
-    //         // .then(res => res.json())
-    //         // .then((data) => {
-    //         //     console.log(data)
-    //         //     setUsername(data.username)
-    //         // })
-
-    //     })()
-    // }, [])
-
     useEffect(() => {
         (async () => {
             setUserId(user.user_id)
+        })()
+    }, [])
+
+    useEffect(() => {
+        (async () => {
+            
+            console.log('user id is: ')
+            console.log(userId)
             const csrftoken = await getCookie('csrftoken')
             const requestOptions = {
                 method: "POST",
@@ -66,7 +52,7 @@ export default function BandsIndex() {
                     setBands(data)
                 })
         })()
-    }, [])
+    }, [userId])
 
     // For every band that belongs to the user, 
     // list a card that links to each band's detail page
