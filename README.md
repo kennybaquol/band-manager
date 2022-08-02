@@ -17,17 +17,17 @@ Band Manager is personal organization and productivity tool geared towards music
 **INSERT DEPLOYED LINK HERE**
 
 ## Next Steps/Icebox Items
-[] Responsiveness for mobile UX
-[] API Functionality (Google Calendar, etc.)
-[] Gig model
-[] SongsToLearn model
-[] SetList model
-[] Calendar model
-[] Inventory model
-[] Income/Expense model
-[] WishList model (user and band)
-[] MarketingTasks model
-[] ContentCreation model
-[] Breathtaking styling
-[] Customizable color themes (and/or light/dark mode)
-[] Mass deployment (www desktop, Android store, iOS App store)
+[] Responsiveness for mobile UX  
+[] API Functionality (Google Calendar, etc.)  
+[] Gig model  
+[] SongsToLearn model  
+[] SetList model  
+[] Calendar model  
+[] Inventory model  
+[] Income/Expense model  
+[] WishList model (user and band)  
+[] MarketingTasks model  
+[] ContentCreation model  
+[] Breathtaking styling  
+[] Customizable color themes (and/or light/dark mode)  
+[] Mass deployment (www desktop, Android store, iOS App store)  
