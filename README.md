@@ -2,11 +2,11 @@
 Band Manager is personal organization and productivity tool geared towards musicians. While online tools like Notion and Trello already let you do almost anything, Band Manager is a stupid simple and niche alternative for minimalists everywhere!
 
 ## Wireframes & ERD
-![BandManagerERD] ('frontend/static/images/BandManagerERD.png')
-![BandManagerERD] ('frontend/static/images/BandManagerERD.png')
-![BandManagerERD] ('frontend/static/images/BandManagerERD.png')
-![BandManagerERD] ('frontend/static/images/BandManagerERD.png')
-![BandManagerERD] ('frontend/static/images/BandManagerERD.png')
+![BandManagerERD](frontend/static/images/BandManagerERD.png)
+![BandManagerERD](frontend/static/images/BandManagerERD.png)
+![BandManagerERD](frontend/static/images/BandManagerERD.png)
+![BandManagerERD](frontend/static/images/BandManagerERD.png)
+![BandManagerERD](frontend/static/images/BandManagerERD.png)
 
 ## Technologies Used
 - Django REST Framework
