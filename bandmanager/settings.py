@@ -25,11 +25,16 @@ CORS_ORIGIN_WHITELIST = [
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!l8kw)9bxe*%nav7z#5ywa32qa85)_#@62#z@gftg6x6^gg2b9'
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
+# Read SECRET_KEY from an environment variable
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = env('DJANGO_DEBUG') != 'False'
 
 # Application definition
 
@@ -78,6 +83,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bandmanager.wsgi.application'
 
+ALLOWED_HOSTS = ['*']
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -85,13 +91,11 @@ WSGI_APPLICATION = 'bandmanager.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'bandmanager'
-        'NAME': 'xkdtgkjv',
-        'USER': 'xkdtgkjv',
-        'PASSWORD': 'TyVXVGi3IUKVTd1S2LFGSQkac1PXfsBT',
-        'HOST': 'ruby.db.elephantsql.com',
-        'PORT': 5432
+        'NAME': env('NAME'),
+        'USER': env('USER'),
+        'PASSWORD': env('PASSWORD'),
+        'HOST': env('HOST'),
+        'PORT': env('PORT')
     }
 }
 
