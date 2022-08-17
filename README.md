@@ -11,7 +11,7 @@ Band Manager is personal organization and productivity tool geared towards music
 - HTML5
 
 ## Getting Started
-**INSERT DEPLOYED LINK HERE**
+https://band-manager-2022.herokuapp.com/
 
 ## Next Steps/Icebox Items
 [] Responsiveness for mobile UX  
