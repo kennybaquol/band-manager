@@ -2,10 +2,12 @@
 Band Manager is a personal organization and productivity tool geared towards musicians. While online tools like Notion and Trello already let you do almost anything, Band Manager is a stupid simple and niche alternative for minimalists everywhere!
 
 ## Technologies Used
+- Django
 - Django REST Framework
 - PostgreSQL
 - Python
 - React
+- Node
 - Materialize
 - CSS
 - HTML5
